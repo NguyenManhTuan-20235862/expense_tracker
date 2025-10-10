@@ -17,7 +17,7 @@ const CustomBarChart = ({ data }) => {
     // Function to alternate colors
     const getBarColor = (index) => {
         return index % 2 === 0 ? '#875cf5' : '#cfbefb';
-    };
+    }; // Nếu dùng return trong comment ở cuối thì bỏ hàm này
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
@@ -64,6 +64,32 @@ const CustomBarChart = ({ data }) => {
         </ResponsiveContainer>
     </div>
   )
+//    return (
+//         <div className='bg-white mt-6'>
+//             <ResponsiveContainer width="100%" height={300}>
+//                 {/* Thêm margin để căn chỉnh cho biểu đồ một cột */}
+//                 <BarChart data={data} margin={{ top: 5, right: 30, left: 30, bottom: 5 }}>
+//                     <CartesianGrid stroke="none" />
+
+//                     {/* Bỏ XAxis nếu bạn không muốn hiển thị nhãn tháng/ngày */}
+//                     {/* <XAxis dataKey="month" tick={{fontSize: 12, fill: '#555'}} stroke="none" /> */}
+                    
+//                     <YAxis tick={{fontSize: 12, fill: '#555'}} stroke="none" />
+
+//                     <Tooltip content={CustomTooltip} />
+
+//                     <Bar
+//                         dataKey="amount"
+//                         // Đặt màu tím cố định, tương tự màu trong ảnh
+//                         fill="#5b48d6" // Màu tím đậm hơn
+//                         radius={[10, 10, 0, 0]} // Giữ bo tròn góc
+//                         // Loại bỏ Cell/map vì ta chỉ có một cột
+//                     >
+//                     </Bar>
+//                 </BarChart>
+//             </ResponsiveContainer>
+//         </div>
+//     )
 }
 
 export default CustomBarChart
