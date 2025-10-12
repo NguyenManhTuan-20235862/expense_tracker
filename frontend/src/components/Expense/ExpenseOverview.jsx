@@ -16,16 +16,16 @@ const ExpenseOverview = ({ transactions, onExpenseIncome }) => {
     <div className="card">
       <div className="flex items-center justify-between">
         <div className="">
-          <h5 className="text-lg">Expense Overview</h5>
+          <h5 className="text-lg">Tổng quan Chi tiêu</h5>
           <p className="text-xs text-gray-400 mt-0.5">
-            Track your spending trends over time and gain insights into where 
-            your money goes.
+            Theo dõi xu hướng chi tiêu của bạn theo thời gian và hiểu rõ hơn về nơi
+            tiền của bạn đang đi đâu.
           </p>
         </div>
 
         <button className="add-btn" onClick={onExpenseIncome}>
           <LuPlus className="text-lg" />
-          Add Expense
+          Thêm chi tiêu
         </button>
       </div>
 

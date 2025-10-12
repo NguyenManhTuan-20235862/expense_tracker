@@ -18,7 +18,7 @@ const CustomLineChart = ({ data }) => {
             {payload[0].payload.category}
           </p>
           <p className="text-xs text-gray-600">
-            Amount:{" "}
+            Số tiền:{" "}
             <span className="text-xs font-medium text-gray-900">
               ${payload[0].payload.amount}
             </span>

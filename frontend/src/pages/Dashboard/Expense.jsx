@@ -36,7 +36,7 @@ const Expense = () => {
         setExpenseData(response.data);
       }
     } catch (error) {
-      console.log("Something went wrong. Please try again.", error);
+      console.log("Đã xảy ra lỗi. Vui lòng thử lại.", error);
     } finally {
       setLoading(false);
     }
@@ -48,17 +48,17 @@ const Expense = () => {
 
     // Validation Checks
     if (!category.trim()) {
-      toast.error("Category is required.");
+      toast.error("Danh mục là bắt buộc.");
       return;
     }
 
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      toast.error("Amount should be a valid number greater than 0.");
+      toast.error("Số tiền phải là một số hợp lệ lớn hơn 0.");
       return;
     }
 
     if (!date) {
-      toast.error("Date is required.");
+      toast.error("Thời gian là bắt buộc.");
       return;
     }
     try {
@@ -70,11 +70,11 @@ const Expense = () => {
       });
 
       setOpenAddExpenseModal(false);
-      toast.success("Expense added successfully");
+      toast.success("Thêm chi tiêu thành công");
       fetchExpenseDetails();
     } catch (error) {
       console.error(
-        "Error adding expense:",
+        "Lỗi thêm chi tiêu:",
         error.response?.data?.message || error.message
       );
     }
@@ -86,11 +86,11 @@ const Expense = () => {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
 
       setOpenDeleteAlert({ show: false, data: null });
-      toast.success("Expense details deleted successfully");
+      toast.success("Chi tiết chi tiêu đã được xóa thành công");
       fetchExpenseDetails();
     } catch (error) {
       console.error(
-        "Error deleting expense:",
+        "Lỗi xóa chi tiêu:",
         error.response?.data?.message || error.message
       );
     }
@@ -116,8 +116,8 @@ const Expense = () => {
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Error downloading expense details:", error);
-      toast.error("Failed to download expense details. Please try again.");
+      console.error("Lỗi tải về chi tiết chi tiêu:", error);
+      toast.error("Tải về chi tiết chi tiêu thất bại. Vui lòng thử lại.");
     }
   };
 
@@ -148,7 +148,7 @@ const Expense = () => {
         <Modal
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
-          title="Add Expense"
+          title="Thêm Chi Tiêu"
         >
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </Modal>
@@ -156,10 +156,10 @@ const Expense = () => {
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
-          title="Delete Expense"
+          title="Xóa Chi Tiêu"
         >
           <DeleteAlert
-            content="Are you sure you want to delete this expense detail?"
+            content="Bạn có chắc chắn muốn xóa chi tiết chi tiêu này không?"
             onDelete={() => deleteExpense(openDeleteAlert.data)}
           />
         </Modal>

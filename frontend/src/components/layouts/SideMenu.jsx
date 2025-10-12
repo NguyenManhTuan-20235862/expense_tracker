@@ -20,7 +20,7 @@ const SideMenu = ({ activeMenu }) => {
 
   const handleLogout = () => {
     // Optionally add confirmation
-    const confirmLogout = window.confirm('Are you sure you want to logout?');
+    const confirmLogout = window.confirm('Bạn có chắc chắn muốn đăng xuất không?');
     
     if (confirmLogout) {
       // Clear all localStorage data

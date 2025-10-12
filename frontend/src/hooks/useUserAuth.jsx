@@ -23,7 +23,7 @@ export const useUserAuth = () => {
           updateUser(response.data);
         }
       } catch (error) {
-        console.error("Failed to fetch user info:", error);
+        console.error("Không thể tải thông tin người dùng:", error);
         if (isMounted) {
           clearUser();
           navigate("/login");

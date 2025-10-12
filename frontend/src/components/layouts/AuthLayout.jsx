@@ -5,7 +5,7 @@ import { LuTrendingUpDown } from "react-icons/lu";
 const AuthLayout = ({children}) => {
   return <div className='flex'>
     <div className='w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12'>
-        <h2 className='text-lg font-medium text-black'>Expense Tracker</h2>
+        <h2 className='text-lg font-medium text-black'>Quản lý Chi tiêu</h2>
         {children}
     </div>
 
@@ -17,7 +17,7 @@ const AuthLayout = ({children}) => {
         <div className='grid grid-cols-1 z-20'>
             <StatsInfoCard
               icon={<LuTrendingUpDown />}
-              label="Track Your Income & Expense"
+              label="Theo dõi Thu nhập & Chi tiêu của bạn"
               value="430,000"
               color="bg-primary"
             />

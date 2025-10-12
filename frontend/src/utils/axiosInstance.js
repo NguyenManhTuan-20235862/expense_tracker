@@ -36,10 +36,10 @@ axiosInstance.interceptors.response.use(
         // Redirect to login page
         window.location.href = "/login";
       } else if (error.response.status === 500) {
-        console.error("Server error. Please try again later.");
+        console.error("サーバーエラー。後ほどもう一度行ってください。");
       }
     } else if (error.code === "ECONNABORTED") {
-      console.error("Request timeout. Please try again.");
+      console.error("タイムアウトしました。もう一度お試ためしください。");
     }
 
     return Promise.reject(error);

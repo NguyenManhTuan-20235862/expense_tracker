@@ -23,12 +23,12 @@ const Login = () => {
     e.preventDefault();
 
     if(!validateEmail(email)) {
-      setError("Please enter a valid email address");
+      setError("Vui lòng nhập một địa chỉ email hợp lệ");
       return;
-  }
+  } 
 
   if(!password) {
-      setError("Please enter your password");
+      setError("Vui lòng nhập mật khẩu");
       return;
   }
 
@@ -51,7 +51,7 @@ const Login = () => {
   if (error.response && error.response.data.message) {
     setError(error.response.data.message);
   } else {
-    setError("Something went wrong. Please try again.");
+    setError("Đã xảy ra lỗi. Vui lòng thử lại.");
   }
 }
 }
@@ -60,37 +60,37 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">Welcome Back</h3>
+        <h3 className="text-xl font-semibold text-black">Chào mừng trở lại!</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          Login enter your details to log in
+          Vui lòng nhập thông tin của bạn để đăng nhập
         </p>
         <form onSubmit={handleLogin}>
           <Input
             value={email}
             onChange={({ target }) => setEmail(target.value)}
-            label="Email Address"
-            placeholder="john@example.com"
+            label="Địa chỉ email"
+            placeholder="a@example.com"
             type="text"
           />
 
           <Input
             value={password}
             onChange={({ target }) => setPassword(target.value)}
-            label="Password"
-            placeholder="Min 8 Characters"
+            label="Mật khẩu"
+            placeholder="Tối thiểu 8 ký tự"
             type="password"
           />
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
           <button type='submit' className='btn-primary'>
-            LOGIN
+            ĐĂNG NHẬP
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
-            Don't have an account?{' '}
+            Bạn chưa có tài khoản?{' '}
             <Link className='font-medium text-primary underline' to="/signup">
-              SignUp
+              Đăng ký
             </Link>
           </p>
         </form>

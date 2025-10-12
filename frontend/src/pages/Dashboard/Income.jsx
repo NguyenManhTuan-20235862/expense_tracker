@@ -37,7 +37,7 @@ const Income = () => {
         setIncomeData(response.data);
       }
     } catch (error) {
-      console.log("Something went wrong. Please try again.", error);
+      console.log("Đã xảy ra lỗi. Vui lòng thử lại.", error);
     } finally {
       setLoading(false);
     }
@@ -49,17 +49,17 @@ const Income = () => {
 
     // Validation Checks
     if (!source.trim()) {
-      toast.error("Source is required.");
+      toast.error("Nguồn thu nhập là bắt buộc.");
       return;
     }
 
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      toast.error("Amount should be a valid number greater than 0.");
+      toast.error("Số tiền phải là một số hợp lệ lớn hơn 0.");
       return;
     }
 
     if (!date) {
-      toast.error("Date is required.");
+      toast.error("Thời gian là bắt buộc.");
       return;
     }
     try {
@@ -71,11 +71,11 @@ const Income = () => {
       });
 
       setOpenAddIncomeModal(false);
-      toast.success("Income added successfully");
+      toast.success("Thêm thu nhập thành công");
       fetchIncomeDetails();
     } catch (error) {
       console.error(
-        "Error adding income:",
+        "Lỗi thêm thu nhập:",
         error.response?.data?.message || error.message
       );
     }
@@ -87,11 +87,11 @@ const Income = () => {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
 
       setOpenDeleteAlert({ show: false, data: null });
-      toast.success("Income details deleted successfully");
+      toast.success("Chi tiết thu nhập đã được xóa thành công");
       fetchIncomeDetails();
     } catch (error) {
       console.error(
-        "Error deleting income:",
+        "Lỗi xóa thu nhập:",
         error.response?.data?.message || error.message
       );
     }
@@ -117,8 +117,8 @@ const Income = () => {
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Error downloading income details:", error);
-      toast.error("Failed to download income details. Please try again.");
+      console.error("Lỗi tải xuống chi tiết thu nhập:", error);
+      toast.error("Tải xuống chi tiết thu nhập thất bại. Vui lòng thử lại.");
     }
   };
 
@@ -151,7 +151,7 @@ const Income = () => {
         <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
-          title="Add Income"
+          title="Thêm thu nhập"
         >
           <AddIncomeForm onAddIncome={handleAddIncome} />
         </Modal>
@@ -159,10 +159,10 @@ const Income = () => {
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
-          title="Delete Income"
+          title="Xóa thu nhập"
         >
           <DeleteAlert
-            content="Are you sure you want to delete this income detail?"
+            content="Bạn có chắc chắn muốn xóa chi tiết thu nhập này không?"
             onDelete={() => deleteIncome(openDeleteAlert.data)}
           />
         </Modal>

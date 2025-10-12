@@ -31,15 +31,15 @@ const SignUp = () => {
     let profileImageUrl = "";
 
     if(!fullName) {
-      setError("Please enter your name");
+      setError("Vui lòng nhập tên của bạn.");
       return;
   }
     if(!validateEmail(email)) {
-      setError("Please enter a valid email address.");
+      setError("Vui lòng nhập một địa chỉ email hợp lệ.");
       return;
   }
   if(!password) {
-      setError("Please enter your password.");
+      setError("Vui lòng nhập mật khẩu.");
       return;
   }
   setError('');
@@ -70,7 +70,7 @@ const SignUp = () => {
       if (error.response && error.response.data.message) {
        setError(error.response.data.message);
     } else {
-       setError("Something went wrong. Please try again.");
+       setError("Đã xảy ra lỗi. Vui lòng thử lại.");
     }
    }
  };
@@ -79,9 +79,9 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'>Create an Account</h3>
+        <h3 className='text-xl font-semibold text-black'>Tạo Tài Khoản</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          Join us today by entering your details bellow.
+          Tham gia cùng chúng tôi hôm nay bằng cách nhập thông tin của bạn bên dưới.
         </p>
 
         <form onSubmit={handleSignUp}>
@@ -92,24 +92,24 @@ const SignUp = () => {
             <Input
               value={fullName}
               onChange={({ target }) => setFullName(target.value)}
-              label="Full Name"
-              placeholder="John"
+              label="Họ và Tên"
+              placeholder="Nguyễn Văn A"
               type="text"
             />
 
             <Input
               value={email}
               onChange={({ target }) => setEmail(target.value)}
-              label="Email Address"
-              placeholder="john@example.com"
+              label="Địa chỉ Email"
+              placeholder="a@example.com"
               type="text"
             />
             <div className='col-span-2'>
             <Input
               value={password}
               onChange={({ target }) => setPassword(target.value)}
-              label="Password"
-              placeholder="Min 8 Characters"
+              label="Mật khẩu"
+              placeholder="Tối thiểu 8 ký tự"
               type="password"
             />
             </div>
@@ -122,9 +122,9 @@ const SignUp = () => {
           </button>
           
           <p className='text-[13px] text-slate-800 mt-3'>
-              Already have an account?{' '}
+              Bạn đã có tài khoản?{' '}
             <Link className='font-medium text-primary underline' to="/login">
-              Login
+              Đăng nhập
             </Link>
           </p>
         </form>
