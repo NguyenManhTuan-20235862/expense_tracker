@@ -11,17 +11,27 @@ const SideMenu = ({ activeMenu }) => {
 
   const handleClick = (route) => {
     if (route === "logout") {
-      handelLogout();
+      handleLogout();
       return;
     }
 
     navigate(route);
   };
 
-  const handelLogout = () => {
-    localStorage.clear();
-    clearUser();
-    navigate("/login");
+  const handleLogout = () => {
+    // Optionally add confirmation
+    const confirmLogout = window.confirm('Are you sure you want to logout?');
+    
+    if (confirmLogout) {
+      // Clear all localStorage data
+      localStorage.clear();
+      
+      // Clear user context
+      clearUser();
+      
+      // Navigate to login page
+      navigate("/login");
+    }
   };
 
   return  (
@@ -50,10 +60,18 @@ const SideMenu = ({ activeMenu }) => {
     {SIDE_MENU_DATA.map((item, index) => (
       <button
         key={`menu_${index}`}
-        className={`w-full flex items-center gap-4 text-[15px] ${activeMenu === item.label ? "text-white bg-primary" : ""} py-3 px-6 rounded-lg mb-3`}
+        className={`w-full flex items-center gap-4 text-[15px] ${
+          activeMenu === item.label 
+            ? "text-white bg-primary" 
+            : "text-gray-700 hover:bg-gray-50"
+        } ${
+          item.label === 'Logout' 
+            ? 'text-red-600 hover:bg-red-50 hover:text-red-700' 
+            : ''
+        } py-3 px-6 rounded-lg mb-3 transition-colors duration-200`}
         onClick={() => handleClick(item.path)}
       >
-        <item.icon className="text-xl" />
+        <item.icon className={`text-lg ${item.label === 'Logout' ? 'text-red-600' : ''}`} />
         {item.label}
       </button>
     ))}
