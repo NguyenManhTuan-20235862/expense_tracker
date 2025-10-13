@@ -152,6 +152,7 @@ Tất cả endpoint có prefix `/api/v1`.
 	- `userId` (ObjectId), `icon`, `category`, `amount`, `date`
 
 ## 7. Video demo
+...
 
 ## 8. Tác giả và liên hệ
 - Nguyễn Mạnh Tuấn - 0378655909
