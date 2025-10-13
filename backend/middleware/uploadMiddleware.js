@@ -16,7 +16,7 @@ const fileFilter = (req, file, cb) => {
     if (allowedTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {
-        cb(new Error('Only .jpeg, .jpg and .png files are allowed'), false);
+        cb(new Error('Chỉ cho phép tệp tin (.jpeg, .jpg và .png)'), false);
     }
 };
 

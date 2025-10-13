@@ -12,7 +12,7 @@ exports.addIncome = async (req, res) => {
 
         // validation check
         if( !source || !amount || !date ){
-            return res.status(400).json({ message: 'Please fill all the fields' });
+            return res.status(400).json({ message: 'Vui lòng điền đầy đủ tất cả các trường' });
         }
 
         const newIncome = new Income({
@@ -27,7 +27,7 @@ exports.addIncome = async (req, res) => {
         res.status(200).json(newIncome);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 }
 
@@ -38,7 +38,7 @@ exports.getAllIncome = async (req, res) => {
         const income = await Income.find({ userId }).sort({ date: -1 });
         res.json(income);
     } catch (error) {
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 };
 
@@ -46,9 +46,9 @@ exports.getAllIncome = async (req, res) => {
 exports.deleteIncome = async (req, res) => {
     try {
         await Income.findByIdAndDelete(req.params.id);
-        res.json({ message: 'Income deleted successfully' });
+        res.json({ message: 'Xóa nguồn thu nhập thành công' });
     } catch (error) {
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 }
 
@@ -72,6 +72,6 @@ exports.downloadIncomeExcel = async (req, res) => {
         xlsx.writeFile(wb, 'income_details.xlsx');
         res.download('income_details.xlsx');
     } catch (error) {
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 };

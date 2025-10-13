@@ -12,7 +12,7 @@ exports.addExpense = async (req, res) => {
 
         // validation check
         if( !category || !amount || !date ){
-            return res.status(400).json({ message: 'Please fill all the fields' });
+            return res.status(400).json({ message: 'Vui lòng điền đầy đủ tất cả các trường' });
         }
 
         const newExpense = new Expense({
@@ -27,7 +27,7 @@ exports.addExpense = async (req, res) => {
         res.status(200).json(newExpense);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 }
 
@@ -38,7 +38,7 @@ exports.getAllExpense = async (req, res) => {
         const expense = await Expense.find({ userId }).sort({ date: -1 });
         res.json(expense);
     } catch (error) {
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 };
 
@@ -46,9 +46,9 @@ exports.getAllExpense = async (req, res) => {
 exports.deleteExpense = async (req, res) => {
     try {
         await Expense.findByIdAndDelete(req.params.id);
-        res.json({ message: 'Expense deleted successfully' });
+        res.json({ message: 'Xóa chi phí thành công' });
     } catch (error) {
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 }
 
@@ -72,6 +72,6 @@ exports.downloadExpenseExcel = async (req, res) => {
         xlsx.writeFile(wb, 'expense_details.xlsx');
         res.download('expense_details.xlsx');
     } catch (error) {
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 };
