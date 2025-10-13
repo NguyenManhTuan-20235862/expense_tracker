@@ -31,15 +31,15 @@ const SignUp = () => {
     let profileImageUrl = "";
 
     if(!fullName) {
-      setError("Vui lòng nhập tên của bạn.");
+      setError("お名前を入力してください。");
       return;
   }
     if(!validateEmail(email)) {
-      setError("Vui lòng nhập một địa chỉ email hợp lệ.");
+      setError("有効なメールアドレスを入力してください。");
       return;
   }
   if(!password) {
-      setError("Vui lòng nhập mật khẩu.");
+      setError("有効なパスワードを入力してください。");
       return;
   }
   setError('');
@@ -70,7 +70,7 @@ const SignUp = () => {
       if (error.response && error.response.data.message) {
        setError(error.response.data.message);
     } else {
-       setError("Đã xảy ra lỗi. Vui lòng thử lại.");
+       setError("エラーが発生しました。もう一度お試しください。");
     }
    }
  };
@@ -79,9 +79,9 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'>Tạo Tài Khoản</h3>
+        <h3 className='text-xl font-semibold text-black'>アカウントを作成する</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          Tham gia cùng chúng tôi hôm nay bằng cách nhập thông tin của bạn bên dưới.
+          下記の情報を入力して、今すぐ参加してください。
         </p>
 
         <form onSubmit={handleSignUp}>
@@ -92,7 +92,7 @@ const SignUp = () => {
             <Input
               value={fullName}
               onChange={({ target }) => setFullName(target.value)}
-              label="Họ và Tên"
+              label="氏名"
               placeholder="Nguyễn Văn A"
               type="text"
             />
@@ -100,7 +100,7 @@ const SignUp = () => {
             <Input
               value={email}
               onChange={({ target }) => setEmail(target.value)}
-              label="Địa chỉ Email"
+              label="メールアドレス"
               placeholder="a@example.com"
               type="text"
             />
@@ -108,8 +108,8 @@ const SignUp = () => {
             <Input
               value={password}
               onChange={({ target }) => setPassword(target.value)}
-              label="Mật khẩu"
-              placeholder="Tối thiểu 8 ký tự"
+              label="パスワード"
+              placeholder="最低8文字"
               type="password"
             />
             </div>
@@ -118,13 +118,13 @@ const SignUp = () => {
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
           <button type='submit' className='btn-primary'>
-              SIGN UP
+              登録
           </button>
           
           <p className='text-[13px] text-slate-800 mt-3'>
-              Bạn đã có tài khoản?{' '}
+              アカウントをお持ちでないですか？{' '}
             <Link className='font-medium text-primary underline' to="/login">
-              Đăng nhập
+              ログイン
             </Link>
           </p>
         </form>

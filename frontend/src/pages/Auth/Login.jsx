@@ -23,12 +23,12 @@ const Login = () => {
     e.preventDefault();
 
     if(!validateEmail(email)) {
-      setError("Vui lòng nhập một địa chỉ email hợp lệ");
+      setError("有効なメールアドレスを入力してください");
       return;
   } 
 
   if(!password) {
-      setError("Vui lòng nhập mật khẩu");
+      setError("有効なパスワードを入力してください");
       return;
   }
 
@@ -51,7 +51,7 @@ const Login = () => {
   if (error.response && error.response.data.message) {
     setError(error.response.data.message);
   } else {
-    setError("Đã xảy ra lỗi. Vui lòng thử lại.");
+    setError("エラーが発生しました。もう一度お試しください。");
   }
 }
 }
@@ -60,15 +60,15 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">Chào mừng trở lại!</h3>
+        <h3 className="text-xl font-semibold text-black">おかえりなさい！</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          Vui lòng nhập thông tin của bạn để đăng nhập
+          あなたの情報を入力してログインしてください
         </p>
         <form onSubmit={handleLogin}>
           <Input
             value={email}
             onChange={({ target }) => setEmail(target.value)}
-            label="Địa chỉ email"
+            label="メールアドレス"
             placeholder="a@example.com"
             type="text"
           />
@@ -76,21 +76,21 @@ const Login = () => {
           <Input
             value={password}
             onChange={({ target }) => setPassword(target.value)}
-            label="Mật khẩu"
-            placeholder="Tối thiểu 8 ký tự"
+            label="パスワード"
+            placeholder="最低8文字"
             type="password"
           />
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
           <button type='submit' className='btn-primary'>
-            ĐĂNG NHẬP
+            ログイン
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
-            Bạn chưa có tài khoản?{' '}
+            アカウントをお持ちでないですか？{' '}
             <Link className='font-medium text-primary underline' to="/signup">
-              Đăng ký
+              登録
             </Link>
           </p>
         </form>

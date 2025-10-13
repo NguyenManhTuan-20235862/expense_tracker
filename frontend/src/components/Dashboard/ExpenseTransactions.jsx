@@ -7,10 +7,10 @@ const ExpenseTransactions = ({ transactions, onSeeMore }) => {
   return (
     <div className="card">
       <div className="flex items-center justify-between ">
-        <h5 className="text-lg">Các khoản chi tiêu</h5>
+        <h5 className="text-lg">支出</h5>
 
         <button className="card-btn" onClick={onSeeMore}>
-          Xem tất cả <LuArrowRight className="text-base" />
+          全部見る <LuArrowRight className="text-base" />
         </button>
       </div>
 

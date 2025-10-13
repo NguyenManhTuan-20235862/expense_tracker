@@ -7,10 +7,10 @@ const RecentTransactions = ({transactions, onSeeMore}) => {
   return (
     <div className="card">
       <div className="flex items-center justify-between ">
-        <h5 className="text-lg">Lịch sử giao dịch</h5>
+        <h5 className="text-lg">取引履歴</h5>
 
          <button className="card-btn" onClick={onSeeMore}>
-           Xem tất cả
+           全部見る
          <LuArrowRight className="text-base" />
          </button>
       </div>

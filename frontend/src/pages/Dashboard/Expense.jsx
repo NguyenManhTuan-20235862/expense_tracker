@@ -36,7 +36,7 @@ const Expense = () => {
         setExpenseData(response.data);
       }
     } catch (error) {
-      console.log("Đã xảy ra lỗi. Vui lòng thử lại.", error);
+      console.log("エラーが発生しました。もう一度行ってください。", error);
     } finally {
       setLoading(false);
     }
@@ -48,17 +48,17 @@ const Expense = () => {
 
     // Validation Checks
     if (!category.trim()) {
-      toast.error("Danh mục là bắt buộc.");
+      toast.error("カテゴリは必須です。");
       return;
     }
 
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      toast.error("Số tiền phải là một số hợp lệ lớn hơn 0.");
+      toast.error("金額は0より大きい有効な数値である必要があります。");
       return;
     }
 
     if (!date) {
-      toast.error("Thời gian là bắt buộc.");
+      toast.error("日付は必須です。");
       return;
     }
     try {
@@ -70,11 +70,11 @@ const Expense = () => {
       });
 
       setOpenAddExpenseModal(false);
-      toast.success("Thêm chi tiêu thành công");
+      toast.success("収入を追加しました");
       fetchExpenseDetails();
     } catch (error) {
       console.error(
-        "Lỗi thêm chi tiêu:",
+        "収入の追加エラー:",
         error.response?.data?.message || error.message
       );
     }
@@ -86,11 +86,11 @@ const Expense = () => {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
 
       setOpenDeleteAlert({ show: false, data: null });
-      toast.success("Chi tiết chi tiêu đã được xóa thành công");
+      toast.success("収入詳細の削除が成功しました");
       fetchExpenseDetails();
     } catch (error) {
       console.error(
-        "Lỗi xóa chi tiêu:",
+        "収入の削除エラー:",
         error.response?.data?.message || error.message
       );
     }
@@ -116,8 +116,8 @@ const Expense = () => {
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Lỗi tải về chi tiết chi tiêu:", error);
-      toast.error("Tải về chi tiết chi tiêu thất bại. Vui lòng thử lại.");
+      console.error("収入のダウンロードエラー:", error);
+      toast.error("収入詳細のダウンロードに失敗しました。もう一度お試しください。");
     }
   };
 
@@ -148,7 +148,7 @@ const Expense = () => {
         <Modal
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
-          title="Thêm Chi Tiêu"
+          title="支出を追加"
         >
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </Modal>
@@ -156,10 +156,10 @@ const Expense = () => {
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
-          title="Xóa Chi Tiêu"
+          title="詳細を削除"
         >
           <DeleteAlert
-            content="Bạn có chắc chắn muốn xóa chi tiết chi tiêu này không?"
+            content="この支出詳細を削除してもよろしいですか？"
             onDelete={() => deleteExpense(openDeleteAlert.data)}
           />
         </Modal>

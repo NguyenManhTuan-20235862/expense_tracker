@@ -20,15 +20,15 @@ const AddIncomeForm = ({ onAddIncome }) => {
       <Input
         value={income.source}
         onChange={({ target }) => handleChange("source", target.value)}
-        label="Nguồn thu nhập"
-        placeholder="Tự do, Lương, Khác..."
+        label="収入源"
+        placeholder="自由, 給与, その他..."
         type="text"
       />
 
       <Input
         value={income.amount}
         onChange={({ target }) => handleChange("amount", target.value)}
-        label="Số tiền"
+        label="金額"
         placeholder=""
         type="number"
       />
@@ -36,14 +36,14 @@ const AddIncomeForm = ({ onAddIncome }) => {
       <Input
         value={income.date}
         onChange={({ target }) => handleChange("date", target.value)}
-        label="Thời gian"
+        label="日付"
         placeholder=""
         type="date"
       />
 
       <div className="flex justify-end mt-6">
         <button type="button" className="add-btn add-btn-fill" onClick={() => onAddIncome(income)}>
-          Thêm thu nhập
+          収入を追加
         </button>
       </div>
     </div>

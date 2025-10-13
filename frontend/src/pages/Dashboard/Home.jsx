@@ -38,7 +38,7 @@ const fetchDashboardData = async () => {
       setDashboardData(response.data);
     }
   } catch (error) {
-    console.log("Đã xảy ra lỗi. Vui lòng thử lại. ", error);
+    console.log("エラーが発生しました。もう一度行ってください。 ", error);
   } finally {
     setLoading(false);
   }
@@ -55,21 +55,21 @@ const fetchDashboardData = async () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <InfoCard
             icon={<IoMdCard />}
-            label="Tổng số dư"
+            label="残高総額"
             value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
             color='bg-primary'
           />
 
           <InfoCard
             icon={<LuWalletMinimal />}
-            label="Tổng thu nhập"
+            label="総収入"
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             color='bg-orange-500'
           />
 
           <InfoCard
             icon={<LuHandCoins />}
-            label="Tổng chi tiêu"
+            label="総支出"
             value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
             color='bg-red-500'
           />

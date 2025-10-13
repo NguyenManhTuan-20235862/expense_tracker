@@ -25,12 +25,12 @@ const RecentIncomeWithChart = ({ data, totalIncome }) => {
   return (
   <div className="card">
     <div className="flex items-center justify-between ">
-      <h5 className="text-lg">Thu nhập 60 ngày qua</h5>
+      <h5 className="text-lg">最近60日間の収入</h5>
     </div>
 
     <CustomPieChart
       data={chartData}
-      label="Total Income"
+      label="総収入"
       totalAmount={`$${totalIncome}`}
       showTextAnchor
       colors={COLORS}

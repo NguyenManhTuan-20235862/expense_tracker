@@ -13,7 +13,7 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
           {icon ? <img src={icon} alt="Icon" className="w-12 h-12" /> : <LuImage />}
         </div>
 
-        <p className="">{icon ? "Đổi biểu tượng" : "Chọn biểu tượng"}</p>
+        <p className="">{icon ? "アイコン変更" : "アイコンを選択"}</p>
       </div>
 
       {isOpen && (

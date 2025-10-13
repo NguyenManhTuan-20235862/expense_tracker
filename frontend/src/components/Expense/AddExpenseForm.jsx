@@ -21,22 +21,22 @@ const AddExpenseForm = ({ onAddExpense }) => {
       <Input
         value={income.category}
         onChange={({ target }) => handleChange("category", target.value)}
-        label="Danh mục"
-        placeholder="Tiền thuê nhà, thực phẩm, ..."
+        label="カテゴリ"
+        placeholder="家賃、食費、..."
         type="text"
       />
 
       <Input
         value={income.amount}
         onChange={({ target }) => handleChange("amount", target.value)}
-        label="Số tiền"
+        label="金額"
         placeholder=""
         type="number"
       />
       <Input
         value={income.date}
         onChange={({ target }) => handleChange("date", target.value)}
-        label="Thời gian"
+        label="日付"
         placeholder=""
         type="date"
       />
@@ -47,7 +47,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
           className="add-btn add-btn-fill"
           onClick={() => onAddExpense(income)}
         >
-          Thêm Chi Tiêu
+          支出を追加
         </button>
       </div>
     </div>
