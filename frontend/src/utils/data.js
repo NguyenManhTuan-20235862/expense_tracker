@@ -2,6 +2,7 @@ import {
   LuLayoutDashboard,
   LuHandCoins,
   LuWalletMinimal,
+  LuSettings,
   LuLogOut,
 } from "react-icons/lu";
 
@@ -23,6 +24,12 @@ export const SIDE_MENU_DATA = [
     label: "支出 / 経費",
     icon: LuHandCoins,
     path: "/expense",
+  },
+  {
+    id: "04",
+    label: "設定",
+    icon: LuSettings,
+    path: "/settings",
   },
   {
     id: "06",
