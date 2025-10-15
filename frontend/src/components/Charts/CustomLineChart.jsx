@@ -8,9 +8,11 @@ import {
   Area,
   AreaChart,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 
 const CustomLineChart = ({ data }) => {
   const CustomTooltip = ({ active, payload }) => {
+    const {t} = useTranslation();
     if (active && payload && payload.length) {
       return (
         <div className="bg-white shadow-md p-2 border border-gray-300">
@@ -18,7 +20,7 @@ const CustomLineChart = ({ data }) => {
             {payload[0].payload.category}
           </p>
           <p className="text-xs text-gray-600">
-            Số tiền:{" "}
+            {t('labelamount')}:{" "}
             <span className="text-xs font-medium text-gray-900">
               ${payload[0].payload.amount}
             </span>

@@ -9,10 +9,13 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { UserContext } from '../../context/userContext';
 import uploadImage from '../../utils/uploadImage';
-
+import { useTranslation } from 'react-i18next';
 
 
 const SignUp = () => {
+
+  const { t } = useTranslation();
+
   const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,15 +34,15 @@ const SignUp = () => {
     let profileImageUrl = "";
 
     if(!fullName) {
-      setError("お名前を入力してください。");
+      setError(t('errorName'));
       return;
   }
     if(!validateEmail(email)) {
-      setError("有効なメールアドレスを入力してください。");
+      setError(t('errorInvalidEmail'));
       return;
   }
   if(!password) {
-      setError("有効なパスワードを入力してください。");
+      setError(t('errorInvalidPassword'));
       return;
   }
   setError('');
@@ -70,7 +73,7 @@ const SignUp = () => {
       if (error.response && error.response.data.message) {
        setError(error.response.data.message);
     } else {
-       setError("エラーが発生しました。もう一度お試しください。");
+       setError(t('error'));
     }
    }
  };
@@ -79,9 +82,9 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'>アカウントを作成する</h3>
+        <h3 className='text-xl font-semibold text-black'>{t('buttonSignUp')}</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          下記の情報を入力して、今すぐ参加してください。
+          {t('textSignUp')}
         </p>
 
         <form onSubmit={handleSignUp}>
@@ -92,7 +95,7 @@ const SignUp = () => {
             <Input
               value={fullName}
               onChange={({ target }) => setFullName(target.value)}
-              label="氏名"
+              label={t('labelName')}
               placeholder="Nguyễn Văn A"
               type="text"
             />
@@ -100,7 +103,7 @@ const SignUp = () => {
             <Input
               value={email}
               onChange={({ target }) => setEmail(target.value)}
-              label="メールアドレス"
+              label={t('email')}
               placeholder="a@example.com"
               type="text"
             />
@@ -108,8 +111,8 @@ const SignUp = () => {
             <Input
               value={password}
               onChange={({ target }) => setPassword(target.value)}
-              label="パスワード"
-              placeholder="最低8文字"
+              label={t('password')}
+              placeholder={t('textplace')}
               type="password"
             />
             </div>
@@ -118,13 +121,13 @@ const SignUp = () => {
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
           <button type='submit' className='btn-primary'>
-              登録
+              {t('signup1')}
           </button>
           
           <p className='text-[13px] text-slate-800 mt-3'>
-              アカウントをお持ちでないですか？{' '}
+              {t('textsig')}{' '}
             <Link className='font-medium text-primary underline' to="/login">
-              ログイン
+              {t('login')}
             </Link>
           </p>
         </form>

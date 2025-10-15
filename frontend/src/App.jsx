@@ -1,4 +1,5 @@
 import React from "react";
+import "./i18n/i18n"; // Import i18n configuration
 
 import {
   BrowserRouter as Router,

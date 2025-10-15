@@ -9,8 +9,10 @@ import { toast } from "react-hot-toast";
 import IncomeList from "../../components/Income/IncomeList";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
+import { useTranslation } from "react-i18next";
 
 const Income = () => {
+  const {t} = useTranslation();
   useUserAuth();
 
   const [incomeData, setIncomeData] = useState([]);
@@ -37,7 +39,7 @@ const Income = () => {
         setIncomeData(response.data);
       }
     } catch (error) {
-      console.log("エラーが発生しました。もう一度行ってください。", error);
+      console.log(t('error'), error);
     } finally {
       setLoading(false);
     }
@@ -49,17 +51,17 @@ const Income = () => {
 
     // Validation Checks
     if (!source.trim()) {
-      toast.error("収入源は必須です。");
+      toast.error(t('errorIncomeSource'));
       return;
     }
 
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      toast.error("金額は0より大きい有効な数値である必要があります。");
+      toast.error(t('texterrormoney'));
       return;
     }
 
     if (!date) {
-      toast.error("日付は必須です。");
+      toast.error(t('texterrorDate'));
       return;
     }
     try {
@@ -71,11 +73,11 @@ const Income = () => {
       });
 
       setOpenAddIncomeModal(false);
-      toast.success("収入を追加しました");
+      toast.success(t('textsuccessincome'));
       fetchIncomeDetails();
     } catch (error) {
       console.error(
-        "収入の追加エラー:",
+        t('texterrorincome'),
         error.response?.data?.message || error.message
       );
     }
@@ -87,11 +89,11 @@ const Income = () => {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
 
       setOpenDeleteAlert({ show: false, data: null });
-      toast.success("収入詳細の削除が成功しました");
+      toast.success(t('textsuccessdelete'));
       fetchIncomeDetails();
     } catch (error) {
       console.error(
-        "収入の削除エラー:",
+        t('texterrordelete'),
         error.response?.data?.message || error.message
       );
     }
@@ -117,8 +119,8 @@ const Income = () => {
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("収入のダウンロードエラー:", error);
-      toast.error("収入詳細のダウンロードに失敗しました。もう一度お試しください。");
+      console.error(t('texterrorDownload'), error);
+      toast.error(t('texterrorincomedl'));
     }
   };
 
@@ -151,7 +153,7 @@ const Income = () => {
         <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
-          title="収入を追加"
+          title={t('buttonaddincome')}
         >
           <AddIncomeForm onAddIncome={handleAddIncome} />
         </Modal>
@@ -159,10 +161,10 @@ const Income = () => {
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
-          title="収入を削除"
+          title={t('titleDeleteIncome')}
         >
           <DeleteAlert
-            content="この収入詳細を削除してもよろしいですか？"
+            content={t('textDeleteIncome')}
             onDelete={() => deleteIncome(openDeleteAlert.data)}
           />
         </Modal>

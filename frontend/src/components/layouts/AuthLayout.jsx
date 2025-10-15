@@ -1,11 +1,14 @@
 import React from 'react'
 import CARD_2 from '../../assets/images/card2.png'
 import { LuTrendingUpDown } from "react-icons/lu";
+import { useTranslation } from 'react-i18next';
 
 const AuthLayout = ({children}) => {
+  const { t } = useTranslation();
+
   return <div className='flex'>
     <div className='w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12'>
-        <h2 className='text-lg font-medium text-black'>支出管理</h2>
+        <h2 className='text-lg font-medium text-black'>{t('title')}</h2>
         {children}
     </div>
 
@@ -17,7 +20,7 @@ const AuthLayout = ({children}) => {
         <div className='grid grid-cols-1 z-20'>
             <StatsInfoCard
               icon={<LuTrendingUpDown />}
-              label="収入と支出を追跡する"
+              label={t('labelright')}
               value="430,000"
               color="bg-primary"
             />

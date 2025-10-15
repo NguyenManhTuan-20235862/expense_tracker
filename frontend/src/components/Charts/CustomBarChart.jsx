@@ -10,9 +10,11 @@ import {
     Legend,
     Cell,
 } from 'recharts';
-
+import { useTranslation } from 'react-i18next';
 
 const CustomBarChart = ({ data }) => {
+
+    const { t } = useTranslation();
 
     // Function to alternate colors
     const getBarColor = (index) => {
@@ -27,7 +29,7 @@ const CustomBarChart = ({ data }) => {
                         {payload[0].payload.category}
                     </p>
                     <p className='text-sm text-gray-600'>
-                        金額:{" "}
+                        {t('labelamount')}:{" "}
                         <span className='text-sm font-medium text-gray-900'>
                             ${payload[0].payload.amount}
                         </span>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../Inputs/Input";
 import EmojiPickerPopup from "../EmojiPickerPopup";
+import { useTranslation } from "react-i18next";
 
 const AddIncomeForm = ({ onAddIncome }) => {
   const [income, setIncome] = useState({
@@ -9,6 +10,8 @@ const AddIncomeForm = ({ onAddIncome }) => {
     date: "",
     icon: "",
   });
+
+  const { t } = useTranslation();
 
   const handleChange = (key, value) => setIncome({ ...income, [key]: value });
   return (
@@ -20,15 +23,15 @@ const AddIncomeForm = ({ onAddIncome }) => {
       <Input
         value={income.source}
         onChange={({ target }) => handleChange("source", target.value)}
-        label="収入源"
-        placeholder="自由, 給与, その他..."
+        label={t('labelIncomeSource')}
+        placeholder={t('placeholderIncomeSource')}
         type="text"
       />
 
       <Input
         value={income.amount}
         onChange={({ target }) => handleChange("amount", target.value)}
-        label="金額"
+        label={t('labelamount')}
         placeholder=""
         type="number"
       />
@@ -36,14 +39,14 @@ const AddIncomeForm = ({ onAddIncome }) => {
       <Input
         value={income.date}
         onChange={({ target }) => handleChange("date", target.value)}
-        label="日付"
+        label={t('labelDate')}
         placeholder=""
         type="date"
       />
 
       <div className="flex justify-end mt-6">
         <button type="button" className="add-btn add-btn-fill" onClick={() => onAddIncome(income)}>
-          収入を追加
+          {t('buttonaddincome')}
         </button>
       </div>
     </div>

@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 const DeleteAlert = ({ content, onDelete }) => {
+  
+  const {t} = useTranslation();
   return (
     <div>
       <p className="text-sm ">{content}</p>
@@ -11,7 +14,7 @@ const DeleteAlert = ({ content, onDelete }) => {
           className="add-btn add-btn-fill"
           onClick={onDelete}
         >
-          削除
+          {t('buttonDelete')}
         </button>
       </div>
     </div>

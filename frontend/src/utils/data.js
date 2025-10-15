@@ -6,34 +6,35 @@ import {
   LuLogOut,
 } from "react-icons/lu";
 
-export const SIDE_MENU_DATA = [
+// Function to get side menu data with translations
+export const getSideMenuData = (t) => [
   {
     id: "01",
-    label: "ダッシュボード",
+    label: t("Dashboard"),
     icon: LuLayoutDashboard,
     path: "/dashboard",
   },
   {
     id: "02",
-    label: "収入",
+    label: t("Income"),
     icon: LuWalletMinimal,
     path: "/income",
   },
   {
     id: "03",
-    label: "支出 / 経費",
+    label: t("Expense"),
     icon: LuHandCoins,
     path: "/expense",
   },
   {
     id: "04",
-    label: "設定",
+    label: t("Setting"),
     icon: LuSettings,
     path: "/settings",
   },
   {
     id: "06",
-    label: "ログアウト",
+    label: t("Logout"),
     icon: LuLogOut,
     path: "logout",
   },

@@ -12,11 +12,13 @@ import ExpenseTransactions from '../../components/Dashboard/ExpenseTransactions'
 import Last30DaysExpenses from '../../components/Dashboard/Last30DaysExpenses';
 import RecentIncomeWithChart from '../../components/Dashboard/RecentIncomeWithChart';
 import RecentIncome from '../../components/Dashboard/RecentIncome';
+import { useTranslation } from 'react-i18next';
 
 import { IoMdCard } from 'react-icons/io';
 import { LuHandCoins, LuWalletMinimal } from 'react-icons/lu';
 
 const Home = () => {
+  const {t} = useTranslation();
   useUserAuth();
 
 const navigate = useNavigate();
@@ -38,7 +40,7 @@ const fetchDashboardData = async () => {
       setDashboardData(response.data);
     }
   } catch (error) {
-    console.log("エラーが発生しました。もう一度行ってください。 ", error);
+    console.log(t('error'), error);
   } finally {
     setLoading(false);
   }
@@ -55,21 +57,21 @@ const fetchDashboardData = async () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <InfoCard
             icon={<IoMdCard />}
-            label="残高総額"
+            label={t('totalbalance')}
             value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
             color='bg-primary'
           />
 
           <InfoCard
             icon={<LuWalletMinimal />}
-            label="総収入"
+            label={t('totalincome')}
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             color='bg-orange-500'
           />
 
           <InfoCard
             icon={<LuHandCoins />}
-            label="総支出"
+            label={t('totalexpense')}
             value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
             color='bg-red-500'
           />

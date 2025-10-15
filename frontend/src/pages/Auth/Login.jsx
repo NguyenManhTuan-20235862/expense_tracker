@@ -7,9 +7,14 @@ import Input from '../../components/Inputs/Input';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { UserContext } from '../../context/userContext';
+import { useTranslation } from 'react-i18next';
 
 
 const Login = () => {
+
+  const { t } = useTranslation()
+
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -23,12 +28,12 @@ const Login = () => {
     e.preventDefault();
 
     if(!validateEmail(email)) {
-      setError("有効なメールアドレスを入力してください");
+      setError(t('errorInvalidEmail'));
       return;
   } 
 
   if(!password) {
-      setError("有効なパスワードを入力してください");
+      setError(t('errorInvalidPassword'));
       return;
   }
 
@@ -51,7 +56,7 @@ const Login = () => {
   if (error.response && error.response.data.message) {
     setError(error.response.data.message);
   } else {
-    setError("エラーが発生しました。もう一度お試しください。");
+    setError(t('error'));
   }
 }
 }
@@ -60,15 +65,15 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">おかえりなさい！</h3>
+        <h3 className="text-xl font-semibold text-black">{t('welcome')}</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          あなたの情報を入力してログインしてください
+          {t('textlog')}
         </p>
         <form onSubmit={handleLogin}>
           <Input
             value={email}
             onChange={({ target }) => setEmail(target.value)}
-            label="メールアドレス"
+            label={t('email')}
             placeholder="a@example.com"
             type="text"
           />
@@ -76,21 +81,21 @@ const Login = () => {
           <Input
             value={password}
             onChange={({ target }) => setPassword(target.value)}
-            label="パスワード"
-            placeholder="最低8文字"
+            label={t('password')}
+            placeholder={t('textplace')}
             type="password"
           />
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
           <button type='submit' className='btn-primary'>
-            ログイン
+            {t('login')}
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
-            アカウントをお持ちでないですか？{' '}
+            {t('textsig')} {' '}
             <Link className='font-medium text-primary underline' to="/signup">
-              登録
+              {t('signup')}
             </Link>
           </p>
         </form>

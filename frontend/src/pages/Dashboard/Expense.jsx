@@ -9,8 +9,10 @@ import AddExpenseForm from "../../components/Expense/AddExpenseForm";
 import Modal from "../../components/Modal";
 import ExpenseList from "../../components/Expense/ExpenseList";
 import DeleteAlert from "../../components/DeleteAlert";
+import { useTranslation } from "react-i18next";
 
 const Expense = () => {
+  const {t} = useTranslation();
   useUserAuth();
 
   const [expenseData, setExpenseData] = useState([]);
@@ -36,7 +38,7 @@ const Expense = () => {
         setExpenseData(response.data);
       }
     } catch (error) {
-      console.log("エラーが発生しました。もう一度行ってください。", error);
+      console.log(t('error'), error);
     } finally {
       setLoading(false);
     }
@@ -48,17 +50,17 @@ const Expense = () => {
 
     // Validation Checks
     if (!category.trim()) {
-      toast.error("カテゴリは必須です。");
+      toast.error(t('errorCategory'));
       return;
     }
 
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      toast.error("金額は0より大きい有効な数値である必要があります。");
+      toast.error(t('texterrormoney'));
       return;
     }
 
     if (!date) {
-      toast.error("日付は必須です。");
+      toast.error(t('texterrorDate'));
       return;
     }
     try {
@@ -70,11 +72,11 @@ const Expense = () => {
       });
 
       setOpenAddExpenseModal(false);
-      toast.success("収入を追加しました");
+      toast.success(t('textSuccessExpense'));
       fetchExpenseDetails();
     } catch (error) {
       console.error(
-        "収入の追加エラー:",
+        t('textErrorExpense'),
         error.response?.data?.message || error.message
       );
     }
@@ -86,11 +88,11 @@ const Expense = () => {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
 
       setOpenDeleteAlert({ show: false, data: null });
-      toast.success("収入詳細の削除が成功しました");
+      toast.success(t('textSuccessDeleteExpense'));
       fetchExpenseDetails();
     } catch (error) {
       console.error(
-        "収入の削除エラー:",
+        t('textErrorDeleteExpense'),
         error.response?.data?.message || error.message
       );
     }
@@ -116,8 +118,8 @@ const Expense = () => {
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("収入のダウンロードエラー:", error);
-      toast.error("収入詳細のダウンロードに失敗しました。もう一度お試しください。");
+      console.error(t('textErrorDownloadExpense'), error);
+      toast.error(t('textErrorExpenseDl'));
     }
   };
 
@@ -148,7 +150,7 @@ const Expense = () => {
         <Modal
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
-          title="支出を追加"
+          title={t('titleAddExpenses')}
         >
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </Modal>
@@ -156,10 +158,10 @@ const Expense = () => {
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
-          title="詳細を削除"
+          title={t('buttonDeleteDetail')}
         >
           <DeleteAlert
-            content="この支出詳細を削除してもよろしいですか？"
+            content={t('textDeleteDetail')}
             onDelete={() => deleteExpense(openDeleteAlert.data)}
           />
         </Modal>

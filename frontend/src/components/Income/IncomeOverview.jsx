@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import CustomBarChart from "../Charts/CustomBarChart";
 import { prepareIncomeBarChartData } from "../../utils/helper";
+import { useTranslation } from "react-i18next";
 
 const IncomeOverview = ({ transactions, onAddIncome }) => {
+
+  const {t} = useTranslation();
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
@@ -16,14 +19,14 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
     <div className="card">
       <div className="flex items-center justify-between">
         <div className="">
-          <h5 className="text-lg">収入概観</h5>
+          <h5 className="text-lg">{t('labelincomeoverview')}</h5>
           <p className="text-xs text-gray-400 mt-0.5">
-            あなたの収入を時間の経過とともに追跡し、収入の傾向を分析します。
+            {t('textincomeoverview')}
           </p>
         </div>
         <button className="add-btn" onClick={onAddIncome}>
           <LuPlus className="text-lg" />
-          収入を追加
+          {t('buttonaddincome')}
         </button>
       </div>
 

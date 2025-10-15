@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import CustomPieChart from '../Charts/CustomPieChart';
+import { useTranslation } from 'react-i18next';
 
 const COLORS = ["#875CF5", "#FA2C37", "#FF6900", "#4F39F6"];
 
 const RecentIncomeWithChart = ({ data, totalIncome }) => {
 
-    const [chartData, setChartData] = useState([]);
+  const { t } = useTranslation();
+
+  const [chartData, setChartData] = useState([]);
 
   const prepareChartData = () => {
   const dataArr = data?.map((item) => ({
@@ -25,12 +28,12 @@ const RecentIncomeWithChart = ({ data, totalIncome }) => {
   return (
   <div className="card">
     <div className="flex items-center justify-between ">
-      <h5 className="text-lg">最近60日間の収入</h5>
+      <h5 className="text-lg">{t('labelrecentincome')}</h5>
     </div>
 
     <CustomPieChart
       data={chartData}
-      label="総収入"
+      label={t('totalincome')}
       totalAmount={`$${totalIncome}`}
       showTextAnchor
       colors={COLORS}

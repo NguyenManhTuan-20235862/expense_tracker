@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../Inputs/Input";
 import EmojiPickerPopup from "../EmojiPickerPopup";
+import { useTranslation } from "react-i18next";
 
 const AddExpenseForm = ({ onAddExpense }) => {
   const [income, setIncome] = useState({
@@ -11,6 +12,9 @@ const AddExpenseForm = ({ onAddExpense }) => {
   });
 
   const handleChange = (key, value) => setIncome({ ...income, [key]: value });
+
+  const {t} = useTranslation();
+
   return (
     <div>
       <EmojiPickerPopup
@@ -21,22 +25,22 @@ const AddExpenseForm = ({ onAddExpense }) => {
       <Input
         value={income.category}
         onChange={({ target }) => handleChange("category", target.value)}
-        label="カテゴリ"
-        placeholder="家賃、食費、..."
+        label={t('labelCategory')}
+        placeholder={t('placeholderCategory')}
         type="text"
       />
 
       <Input
         value={income.amount}
         onChange={({ target }) => handleChange("amount", target.value)}
-        label="金額"
+        label={t('labelamount')}
         placeholder=""
         type="number"
       />
       <Input
         value={income.date}
         onChange={({ target }) => handleChange("date", target.value)}
-        label="日付"
+        label={t('labelDate')}
         placeholder=""
         type="date"
       />
@@ -47,7 +51,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
           className="add-btn add-btn-fill"
           onClick={() => onAddExpense(income)}
         >
-          支出を追加
+          {t('titleAddExpenses')}
         </button>
       </div>
     </div>
