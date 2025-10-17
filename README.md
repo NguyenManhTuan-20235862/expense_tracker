@@ -110,6 +110,7 @@ Nếu muốn giữ backend mặc định 5000 theo `server.js`, hãy đổi `BAS
 - Các class có biến thể `dark:` để đổi style theo theme
 
 Lưu ý: Tailwind v4 dùng `@import "tailwindcss";` trong `frontend/src/index.css` thay cho cấu hình v3.
+**** Chế độ chưa được hoàn thiện.
 
 ## 7. 💰 Budget Planning
 
@@ -133,6 +134,7 @@ Tính năng:
 - Thêm/Sửa/Xóa ngân sách theo danh mục
 - Thanh tiến độ theo tỷ lệ đã chi/giới hạn
 - Thẻ tổng quan: Tổng ngân sách, Đã chi, Còn lại
+** Chức năng chưa hoàn thiện , dừng lại ở việc demo , chưa liên kết với dữ liệu trong income, expense.
 
 ## 5. 🛠️ API Endpoints (Chi tiết)
 
@@ -205,32 +207,6 @@ Tất cả endpoint có prefix `/api/v1`.
 
 ---
 
-## 9. 🔎 Khắc phục sự cố (Troubleshooting)
 
-- Chỉ thấy Navbar, phần nội dung trống:
-	- `DashboardLayout` đã xử lý trạng thái tải khi `user` chưa sẵn sàng; đảm bảo không xóa phần này.
-- Tailwind không áp dụng style:
-	- Dự án dùng Tailwind v4. Đảm bảo `@import "tailwindcss";` trong `frontend/src/index.css` và dùng biến thể `dark:` nếu cần.
-- Lỗi key i18n:
-	- Kiểm tra khóa có tồn tại trong `frontend/src/locales/{lang}/*.json` và gọi đúng `t('key')`.
-- Không gọi đúng API do sai port:
-	- Frontend đang trỏ `BASE_URL = http://localhost:8000`. Hãy đặt `PORT=8000` cho backend hoặc đổi `BASE_URL` sang `http://localhost:5000`.
-
-## 10. 🧰 Lệnh nhanh (Scripts)
-
-Backend (trong thư mục `backend/`):
-
-```powershell
-npm run dev   # chạy bằng nodemon
-npm start     # chạy production bằng node server.js
-```
-
-Frontend (trong thư mục `frontend/`):
-
-```powershell
-npm run dev
-npm run build
-npm run preview
-```
 
 
