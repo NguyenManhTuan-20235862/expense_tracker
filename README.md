@@ -11,6 +11,9 @@
 - Quản lý Chi tiêu (Expense): thêm, xem, xóa, tải Excel
 - Dashboard: tổng quan tổng thu, tổng chi, giao dịch gần đây, thống kê 30/60 ngày
 - Upload ảnh hồ sơ người dùng (multer)
+ - Quốc tế hóa giao diện (i18n): hỗ trợ EN/JA/VI (i18next + react-i18next)
+ - Chế độ tối (Dark mode) dùng Tailwind v4 (class strategy)
+ - Lập kế hoạch ngân sách (Budget Planning): thêm/sửa/xóa ngân sách theo danh mục, thanh tiến độ, thẻ tổng quan (lưu cục bộ bằng localStorage)
 
 ## 2. 📌 Tính Năng Chính
 
@@ -40,22 +43,24 @@
 ## 3. 🚀 Công Nghệ Sử Dụng
 
 ### Backend
-- Node.js, Express
+- Node.js, Express 5
 - MongoDB (Mongoose)
 - JWT (jsonwebtoken)
 - Multer (upload hình)
 - xlsx (xuất file Excel)
+ - CORS, dotenv
 
 ### Frontend
-- React, Vite
-- axios, react-router-dom
+- React 19, Vite 7
+- react-router-dom 7, axios
+- Tailwind CSS v4 (hỗ trợ dark mode theo class `.dark`)
+- i18next, react-i18next (đa ngôn ngữ EN/JA/VI)
 - Recharts (biểu đồ)
-- TailwindCSS
 
 ## 4. ⚙️ Cài Đặt và Hướng Dẫn Sử Dụng (Local)
 
 ### Yêu cầu hệ thống
-- Node.js >= 16
+- Node.js >= 18
 - npm
 - MongoDB 
 
@@ -75,6 +80,7 @@ Tạo file `.env` trong `backend/` với nội dung mẫu:
 ```
 MONGODB_URI=<connection-string-to-mongodb>
 JWT_SECRET=<some-secret-string>
+CLIENT_URL=http://localhost:5173
 PORT=8000
 ```
 
@@ -87,6 +93,46 @@ npm run dev
 ```
 
 Frontend mặc định chạy trên `http://localhost:5173`. Kiểm tra và chỉnh `frontend/src/utils/apiPaths.js` nếu backend sử dụng port khác (frontend hiện tại đặt `BASE_URL = "http://localhost:8000"`).
+
+Nếu muốn giữ backend mặc định 5000 theo `server.js`, hãy đổi `BASE_URL` trong `frontend/src/utils/apiPaths.js` sang `http://localhost:5000`. Khuyến nghị: đặt `PORT=8000` trong `.env` backend để khớp cấu hình frontend hiện tại.
+
+## 5. 🌐 i18n (Đa ngôn ngữ)
+
+- Sử dụng i18next + react-i18next
+- File dịch: `frontend/src/locales/{en,ja,vi}/*.json`
+- Trong component, dùng hook `useTranslation()` và gọi `t('your.key')`
+- Đã tích hợp cho Layout, Settings/Profile và trang Budget Planning
+
+## 6. 🌙 Chế độ Tối (Dark Mode)
+
+- Tailwind CSS v4, chiến lược theo class `.dark` gắn trên thẻ `<html>`
+- Nút chuyển theme: `frontend/src/components/layouts/DarkModeToggle.jsx`
+- Các class có biến thể `dark:` để đổi style theo theme
+
+Lưu ý: Tailwind v4 dùng `@import "tailwindcss";` trong `frontend/src/index.css` thay cho cấu hình v3.
+
+## 7. 💰 Budget Planning
+
+- Trang: `frontend/src/pages/Dashboard/BudgetPlanning.jsx`
+- Thành phần: `frontend/src/components/Budget/*`
+- Dịch vụ lưu cục bộ: `frontend/src/services/budgetService.js` (localStorage)
+
+Cấu trúc dữ liệu budget:
+
+```
+{
+	id: string,
+	category: string,
+	limit: number,
+	spent: number,
+	color?: string
+}
+```
+
+Tính năng:
+- Thêm/Sửa/Xóa ngân sách theo danh mục
+- Thanh tiến độ theo tỷ lệ đã chi/giới hạn
+- Thẻ tổng quan: Tổng ngân sách, Đã chi, Còn lại
 
 ## 5. 🛠️ API Endpoints (Chi tiết)
 
@@ -158,5 +204,33 @@ Tất cả endpoint có prefix `/api/v1`.
 - Nguyễn Mạnh Tuấn - 0378655909
 
 ---
+
+## 9. 🔎 Khắc phục sự cố (Troubleshooting)
+
+- Chỉ thấy Navbar, phần nội dung trống:
+	- `DashboardLayout` đã xử lý trạng thái tải khi `user` chưa sẵn sàng; đảm bảo không xóa phần này.
+- Tailwind không áp dụng style:
+	- Dự án dùng Tailwind v4. Đảm bảo `@import "tailwindcss";` trong `frontend/src/index.css` và dùng biến thể `dark:` nếu cần.
+- Lỗi key i18n:
+	- Kiểm tra khóa có tồn tại trong `frontend/src/locales/{lang}/*.json` và gọi đúng `t('key')`.
+- Không gọi đúng API do sai port:
+	- Frontend đang trỏ `BASE_URL = http://localhost:8000`. Hãy đặt `PORT=8000` cho backend hoặc đổi `BASE_URL` sang `http://localhost:5000`.
+
+## 10. 🧰 Lệnh nhanh (Scripts)
+
+Backend (trong thư mục `backend/`):
+
+```powershell
+npm run dev   # chạy bằng nodemon
+npm start     # chạy production bằng node server.js
+```
+
+Frontend (trong thư mục `frontend/`):
+
+```powershell
+npm run dev
+npm run build
+npm run preview
+```
 
 
