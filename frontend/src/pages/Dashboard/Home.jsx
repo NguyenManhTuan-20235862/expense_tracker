@@ -53,7 +53,7 @@ const fetchDashboardData = async () => {
 
   return (
     <DashboardLayout activeMenu ="Dashboard">
-      <div className='my-5 mx-auto'>
+      <div className='my-5 mx-auto text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <InfoCard
             icon={<IoMdCard />}

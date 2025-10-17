@@ -4,6 +4,7 @@ import {
   LuWalletMinimal,
   LuSettings,
   LuLogOut,
+  LuWallet,
 } from "react-icons/lu";
 
 // Function to get side menu data with translations
@@ -28,6 +29,12 @@ export const getSideMenuData = (t) => [
   },
   {
     id: "04",
+    label: t("Budget Planning"),
+    icon: LuWallet,
+    path: "/budget-planning",
+  },
+  {
+    id: "05",
     label: t("Setting"),
     icon: LuSettings,
     path: "/settings",

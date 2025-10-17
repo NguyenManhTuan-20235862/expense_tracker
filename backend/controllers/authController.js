@@ -81,3 +81,83 @@ exports.getUserInfo = async (req, res) => {
         .json({ message: 'Lỗi lấy thông tin người dùng', error: err.message });
     }
 };
+
+//Update User Profile
+exports.updateUser = async (req, res) => {
+    const { fullName, email, profileImageUrl } = req.body;
+
+    try {
+        const user = await User.findById(req.user.id);
+        
+        if (!user) {
+            return res.status(404).json({ message: 'Người dùng không tồn tại' });
+        }
+
+        // Check if email is being changed and if it's already in use
+        if (email && email !== user.email) {
+            const existingUser = await User.findOne({ email });
+            if (existingUser) {
+                return res.status(400).json({ message: 'Email này đã được sử dụng' });
+            }
+        }
+
+        // Update fields
+        if (fullName) user.fullName = fullName;
+        if (email) user.email = email;
+        if (profileImageUrl !== undefined) user.profileImageUrl = profileImageUrl;
+
+        await user.save();
+
+        // Return user without password
+        const updatedUser = await User.findById(user._id).select('-password');
+
+        res.status(200).json({
+            message: 'Cập nhật thông tin thành công',
+            user: updatedUser,
+        });
+    } catch (err) {
+        res
+            .status(500)
+            .json({ message: 'Lỗi cập nhật thông tin người dùng', error: err.message });
+    }
+};
+
+//Change Password
+exports.changePassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+
+    // Validation
+    if (!currentPassword || !newPassword) {
+        return res.status(400).json({ message: 'Vui lòng điền đầy đủ tất cả các trường' });
+    }
+
+    if (newPassword.length < 8) {
+        return res.status(400).json({ message: 'Mật khẩu mới phải có ít nhất 8 ký tự' });
+    }
+
+    try {
+        const user = await User.findById(req.user.id);
+        
+        if (!user) {
+            return res.status(404).json({ message: 'Người dùng không tồn tại' });
+        }
+
+        // Verify current password
+        const isPasswordCorrect = await user.comparePassword(currentPassword);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ message: 'Mật khẩu hiện tại không đúng' });
+        }
+
+        // Update password
+        user.password = newPassword;
+        await user.save();
+
+        res.status(200).json({
+            message: 'Đổi mật khẩu thành công',
+        });
+    } catch (err) {
+        res
+            .status(500)
+            .json({ message: 'Lỗi đổi mật khẩu', error: err.message });
+    }
+};

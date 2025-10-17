@@ -1,5 +1,5 @@
 import React from "react";
-import "./i18n/i18n"; // Import i18n configuration
+import "./i18n/i18n";
 
 import {
   BrowserRouter as Router,
@@ -13,6 +13,7 @@ import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 import Setting from "./pages/Dashboard/Setting";
+import Budget_Planning from "./pages/Dashboard/BudgetPlanning";
 import UserProvider from "./context/userContext";
 import { Toaster } from "react-hot-toast";
 
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/dashboard" exact element={<Home />} />
             <Route path="/income" exact element={<Income />} />
             <Route path="/expense" exact element={<Expense />} />
+            <Route path="/budget-planning" exact element={<Budget_Planning />} />
             <Route path="/settings" exact element={<Setting />} />
           </Routes>
         </Router>

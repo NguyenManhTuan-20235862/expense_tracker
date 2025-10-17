@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 
 const IncomeList = ({ transactions, onDelete, onDownload }) => {
   const { t } = useTranslation();
-  return (
+  return ( 
     <div className="card">
       <div className="flex items-center justify-between">
-        <h5 className="text-lg">{t('labelincomeSource')}</h5>
+        <h5 className="text-lg">{t('labelIncomeSource')}</h5>
         <button className="card-btn" onClick={onDownload}>
           <LuDownload className="text-base" /> {t('buttonDownload')}
         </button>

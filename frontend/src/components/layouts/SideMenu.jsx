@@ -20,6 +20,7 @@ const SideMenu = ({ activeMenu }) => {
       'Dashboard': '/dashboard',
       'Income': '/income',
       'Expense': '/expense',
+      'Budget Planning': '/budget-planning',
       'Settings': '/settings',
     };
     return menuMap[menu] || menu;
@@ -53,7 +54,7 @@ const SideMenu = ({ activeMenu }) => {
   };
 
   return  (
-  <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 p-5 sticky top-[61px] z-20">
+  <div className="w-64 h-[calc(100vh-61px)] bg-white dark:bg-gray-900 border-r border-gray-200/50 dark:border-gray-700 p-5 sticky top-[61px] z-20 transition-colors duration-300">
     <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-7">
       {user?.profileImageUrl ? (
         <img
@@ -70,7 +71,7 @@ const SideMenu = ({ activeMenu }) => {
       />
       )}
 
-      <h5 className="text-gray-950 font-medium leading-6">
+      <h5 className="text-gray-950 dark:text-white font-medium leading-6">
         {user?.fullName || ""}
       </h5>
     </div>
@@ -80,11 +81,11 @@ const SideMenu = ({ activeMenu }) => {
         key={`menu_${index}`}
         className={`w-full flex items-center gap-4 text-[15px] ${
           activeMenuPath === item.path 
-            ? "text-white bg-primary" 
-            : "text-gray-700 hover:bg-gray-50"
+            ? "text-white bg-primary dark:bg-primary" 
+            : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
         } ${
           item.path === 'logout' 
-            ? 'text-red-600 hover:bg-red-50 hover:text-red-700' 
+            ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-900 hover:text-red-700' 
             : ''
         } py-3 px-6 rounded-lg mb-3 transition-colors duration-200`}
         onClick={() => handleClick(item.path)}

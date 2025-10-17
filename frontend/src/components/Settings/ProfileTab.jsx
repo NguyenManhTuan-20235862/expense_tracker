@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Input from '../Inputs/Input'
 import ProfilePhotoSelector from '../Inputs/ProfilePhotoSelector'
 import axiosInstance from '../../utils/axiosInstance'
@@ -15,8 +15,16 @@ const ProfileTab = ({ userInfo, onUserUpdate }) => {
   const [profilePic, setProfilePic] = useState(null)
   const [fullName, setFullName] = useState(userInfo.fullName || '')
   const [email, setEmail] = useState(userInfo.email || '')
-  const [currentProfileUrl] = useState(userInfo.profileImageUrl || '')
+  const [currentProfileUrl, setCurrentProfileUrl] = useState(userInfo.profileImageUrl || '')
   const [loading, setLoading] = useState(false)
+
+  // Keep local state in sync when userInfo prop changes (e.g., after async fetch)
+  useEffect(() => {
+    if (!userInfo) return
+    setFullName(userInfo.fullName || '')
+    setEmail(userInfo.email || '')
+    setCurrentProfileUrl(userInfo.profileImageUrl || '')
+  }, [userInfo])
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault()
