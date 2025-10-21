@@ -13,7 +13,6 @@
 - Upload ảnh hồ sơ người dùng (multer)
  - Quốc tế hóa giao diện (i18n): hỗ trợ EN/JA/VI (i18next + react-i18next)
  - Chế độ tối (Dark mode) dùng Tailwind v4 (class strategy)
- - Lập kế hoạch ngân sách (Budget Planning): thêm/sửa/xóa ngân sách theo danh mục, thanh tiến độ, thẻ tổng quan (lưu cục bộ bằng localStorage)
 
 ## 2. 📌 Tính Năng Chính
 
@@ -112,31 +111,8 @@ Nếu muốn giữ backend mặc định 5000 theo `server.js`, hãy đổi `BAS
 Lưu ý: Tailwind v4 dùng `@import "tailwindcss";` trong `frontend/src/index.css` thay cho cấu hình v3.
 **** Chế độ chưa được hoàn thiện.
 
-## 7. 💰 Budget Planning
 
-- Trang: `frontend/src/pages/Dashboard/BudgetPlanning.jsx`
-- Thành phần: `frontend/src/components/Budget/*`
-- Dịch vụ lưu cục bộ: `frontend/src/services/budgetService.js` (localStorage)
-
-Cấu trúc dữ liệu budget:
-
-```
-{
-	id: string,
-	category: string,
-	limit: number,
-	spent: number,
-	color?: string
-}
-```
-
-Tính năng:
-- Thêm/Sửa/Xóa ngân sách theo danh mục
-- Thanh tiến độ theo tỷ lệ đã chi/giới hạn
-- Thẻ tổng quan: Tổng ngân sách, Đã chi, Còn lại
-** Chức năng chưa hoàn thiện , dừng lại ở việc demo , chưa liên kết với dữ liệu trong income, expense.
-
-## 5. 🛠️ API Endpoints (Chi tiết)
+## 7. 🛠️ API Endpoints (Chi tiết)
 
 Tất cả endpoint có prefix `/api/v1`.
 
@@ -188,7 +164,7 @@ Tất cả endpoint có prefix `/api/v1`.
 - GET `/api/v1/dashboard` (protected)
 	- Response: `{ totalBalance, totalIncome, totalExpense, last30DaysExpenses, last60DaysIncome, recentTransactions }`
 
-## 6. 🗃️ Database & Mô hình dữ liệu (Tóm tắt)
+## 8. 🗃️ Database & Mô hình dữ liệu (Tóm tắt)
 
 - `User`:
 	- `fullName`, `email` (unique), `password` (được hash), `profileImageUrl`
@@ -199,10 +175,10 @@ Tất cả endpoint có prefix `/api/v1`.
 - `Expense`:
 	- `userId` (ObjectId), `icon`, `category`, `amount`, `date`
 
-## 7. Video demo
+## 9. Video demo
 ...
 
-## 8. Tác giả và liên hệ
+## 10. Tác giả và liên hệ
 - Nguyễn Mạnh Tuấn - 0378655909
 
 ---
