@@ -100,7 +100,6 @@ Nếu muốn giữ backend mặc định 5000 theo `server.js`, hãy đổi `BAS
 - Sử dụng i18next + react-i18next
 - File dịch: `frontend/src/locales/{en,ja,vi}/*.json`
 - Trong component, dùng hook `useTranslation()` và gọi `t('your.key')`
-- Đã tích hợp cho Layout, Settings/Profile và trang Budget Planning
 
 ## 6. 🌙 Chế độ Tối (Dark Mode)
 
