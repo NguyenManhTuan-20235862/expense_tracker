@@ -6,6 +6,7 @@
     "Setting": "Settings",
     "Dashboard": "Dashboard",
     "Logout": "Log Out",
+    "Budget Planning": "Budget Planning",
     "textSideMenuLogout": "Are you sure you want to log out?",
 
     "totalbalance": "Total Balance",
@@ -129,7 +130,7 @@
     "budgetLimit": "Limit",
     "budgetSpent": "Spent",
     "budgetRemaining": "Remaining",
-    "budgetOver": "Over",
+    "budgetOver": "Over", 
     "budgetProgress": "Progress",
     "budgetOverLimit": "Over Budget!",
     "budgetExceededBy": "Exceeded by",
@@ -147,6 +148,11 @@
     "budgetSummaryTitle": "Budget Summary",
     "budgetTotalBudget": "Total Budget",
     "budgetSpentPercentage": "Spent Percentage",
-    "budgetNoData": "No budget data available"
+    "budgetNoData": "No budget data available",
+    "budgetHistoryTitle": "Previous Month Budget History",
+    "budgetNewMonthButton": "Start New Month",
+    "budgetNewMonthTooltip": "Finish current month and start planning for next month",
+    "budgetConfirmNewMonth": "Are you sure you want to start a new month? Current budgets will be moved to history.",
+    "budgetNewMonthSuccess": "Started new month: {{month}}"
   }
 }

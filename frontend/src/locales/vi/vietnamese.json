@@ -6,6 +6,7 @@
     "Setting": "Cài Đặt",
     "Dashboard": "Bảng Điều Khiển",
     "Logout": "Đăng Xuất",
+    "Budget Planning": "Lập Ngân Sách",
     "textSideMenuLogout": "Bạn có chắc chắn muốn đăng xuất?",
 
     "totalbalance": "Tổng Số Dư",
@@ -145,6 +146,11 @@
     "budgetSummaryTitle": "Tổng Quan Ngân Sách",
     "budgetTotalBudget": "Tổng Ngân Sách",
     "budgetSpentPercentage": "Tỷ Lệ Chi Tiêu",
-    "budgetNoData": "Chưa có dữ liệu ngân sách"
+    "budgetNoData": "Chưa có dữ liệu ngân sách",
+    "budgetHistoryTitle": "Lịch Sử Ngân Sách Tháng Trước",
+    "budgetNewMonthButton": "Bắt Đầu Tháng Mới",
+    "budgetNewMonthTooltip": "Kết thúc tháng hiện tại và bắt đầu lập kế hoạch cho tháng tiếp theo",
+    "budgetConfirmNewMonth": "Bạn có chắc muốn bắt đầu tháng mới? Các ngân sách hiện tại sẽ được chuyển vào lịch sử.",
+    "budgetNewMonthSuccess": "Đã bắt đầu tháng mới: {{month}}"
   }
 }

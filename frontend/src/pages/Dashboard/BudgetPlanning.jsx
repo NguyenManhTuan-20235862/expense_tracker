@@ -3,19 +3,39 @@ import DashboardLayout from '../../components/layouts/DashboardLayout'
 import BudgetSummary from '../../components/Budget/BudgetSummary'
 import BudgetItemCard from '../../components/Budget/BudgetItemCard'
 import AddBudgetModal from '../../components/Budget/AddBudgetModal'
-import { getBudgets, addBudget, updateBudget, deleteBudget } from '../../services/budgetService'
+import BudgetHistory from '../../components/Budget/BudgetHistory'
+import { 
+  getBudgets, 
+  addBudget, 
+  updateBudget, 
+  deleteBudget, 
+  getPreviousMonthBudgets,
+  getActiveMonthString,
+  getPreviousMonthString,
+  formatMonthDisplay,
+  startNewMonth,
+  hasActiveBudgets
+} from '../../services/budgetService'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
-import { MdWarning } from 'react-icons/md'
+import { MdWarning, MdNavigateNext } from 'react-icons/md'
 
 const Budget_Planning = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [items, setItems] = useState([])
+  const [previousMonthItems, setPreviousMonthItems] = useState([])
   const [open, setOpen] = useState(false)
   const [editingId, setEditingId] = useState(null)
+  const [activeMonth, setActiveMonth] = useState(getActiveMonthString())
+  const previousMonth = getPreviousMonthString()
 
   useEffect(() => {
-    setItems(getBudgets())
+    // Load active month budgets
+    const currentActive = getActiveMonthString()
+    setActiveMonth(currentActive)
+    setItems(getBudgets(currentActive))
+    // Load previous month budgets for history
+    setPreviousMonthItems(getPreviousMonthBudgets())
   }, [])
 
   // Check for over-budget items and show warnings
@@ -47,7 +67,7 @@ const Budget_Planning = () => {
     const item = items.find(i => i.id === id)
     if (window.confirm(t('budgetConfirmDelete', { category: item?.category || '' }))) {
       deleteBudget(id)
-      setItems(getBudgets())
+      setItems(getBudgets(activeMonth))
       toast.success(t('budgetDeleteSuccess'))
     }
   }
@@ -57,11 +77,24 @@ const Budget_Planning = () => {
       updateBudget(editingId, data)
       toast.success(t('budgetUpdateSuccess'))
     } else {
-      addBudget(data)
+      addBudget(data, activeMonth)
       toast.success(t('budgetAddSuccess'))
     }
-    setItems(getBudgets())
+    setItems(getBudgets(activeMonth))
     setOpen(false)
+  }
+
+  const handleStartNewMonth = () => {
+    if (hasActiveBudgets()) {
+      const confirmed = window.confirm(t('budgetConfirmNewMonth'))
+      if (!confirmed) return
+    }
+
+    const newMonth = startNewMonth()
+    setActiveMonth(newMonth)
+    setItems([])
+    setPreviousMonthItems(getPreviousMonthBudgets())
+    toast.success(t('budgetNewMonthSuccess', { month: formatMonthDisplay(newMonth, i18n.language) }))
   }
 
   // Statistics
@@ -73,7 +106,9 @@ const Budget_Planning = () => {
             <div className='flex flex-col md:flex-row md:items-center justify-between gap-4'>
               <div>
                 <h1 className='text-3xl font-bold'>{t('budgetPlanningTitle')}</h1>
-                <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>{t('budgetPlanningDesc')}</p>
+                <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
+                  {t('budgetPlanningDesc')} - <span className="font-semibold">{formatMonthDisplay(activeMonth, i18n.language)}</span>
+                </p>
                 {overBudgetCount > 0 && (
                   <div className="mt-2 flex items-center gap-2 text-red-600 dark:text-red-400 text-sm font-medium">
                     <MdWarning size={16} />
@@ -81,7 +116,17 @@ const Budget_Planning = () => {
                   </div>
                 )}
               </div>
-              <button className='add-btn' onClick={handleAdd}>+ {t('budgetAddButton')}</button>
+              <div className="flex gap-3">
+                <button 
+                  className='btn-primary bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 flex items-center gap-2' 
+                  onClick={handleStartNewMonth}
+                  title={t('budgetNewMonthTooltip')}
+                >
+                  <MdNavigateNext size={20} />
+                  {t('budgetNewMonthButton')}
+                </button>
+                <button className='add-btn' onClick={handleAdd}>+ {t('budgetAddButton')}</button>
+              </div>
             </div>
 
             <div className='mt-6'>
@@ -106,6 +151,9 @@ const Budget_Planning = () => {
               onClose={() => setOpen(false)}
               onSubmit={handleSubmit}
             />
+
+            {/* Previous Month History */}
+            <BudgetHistory budgets={previousMonthItems} monthString={previousMonth} />
         </div>
     </DashboardLayout>
   )

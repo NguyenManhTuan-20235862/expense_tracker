@@ -6,6 +6,7 @@
         "Setting": "設定",
         "Dashboard": "ダッシュボード",
         "Logout": "ログアウト",
+        "Budget Planning": "予算計画",
         "textSideMenuLogout": "ログアウトしてもよろしいですか?",
 
         "totalbalance": "残高総額",
@@ -153,7 +154,12 @@
         "budgetSummaryTitle": "予算サマリー",
         "budgetTotalBudget": "総予算",
         "budgetSpentPercentage": "支出率",
-        "budgetNoData": "予算データがありません"
+        "budgetNoData": "予算データがありません",
+        "budgetHistoryTitle": "先月の予算履歴",
+        "budgetNewMonthButton": "新しい月を始める",
+        "budgetNewMonthTooltip": "今月を終了し、来月の計画を開始します",
+        "budgetConfirmNewMonth": "新しい月を始めてもよろしいですか？現在の予算は履歴に移動されます。",
+        "budgetNewMonthSuccess": "新しい月を開始しました: {{month}}"
 
     }
 
