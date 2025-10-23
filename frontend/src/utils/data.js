@@ -5,6 +5,7 @@ import {
   LuSettings,
   LuLogOut,
   LuWallet,
+  LuTarget,
 } from "react-icons/lu";
 
 // Function to get side menu data with translations
@@ -35,12 +36,18 @@ export const getSideMenuData = (t) => [
   },
   {
     id: "05",
+    label: t("Reminders/Goals"),
+    icon: LuTarget,
+    path: "/reminders-goals",
+  },
+  {
+    id: "06",
     label: t("Setting"),
     icon: LuSettings,
     path: "/settings",
   },
   {
-    id: "06",
+    id: "07",
     label: t("Logout"),
     icon: LuLogOut,
     path: "logout",

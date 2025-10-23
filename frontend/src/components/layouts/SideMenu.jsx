@@ -21,6 +21,7 @@ const SideMenu = ({ activeMenu }) => {
       'Income': '/income',
       'Expense': '/expense',
       'Budget Planning': '/budget-planning',
+      'Reminders/Goals': '/reminders-goals',
       'Settings': '/settings',
     };
     return menuMap[menu] || menu;
@@ -42,8 +43,22 @@ const SideMenu = ({ activeMenu }) => {
     const confirmLogout = window.confirm(t('textSideMenuLogout'));
     
     if (confirmLogout) {
+      // Save budget data, goals/reminders, and app preferences before clearing
+      const budgets = localStorage.getItem('budgets');
+      const budgetActiveMonth = localStorage.getItem('budgetActiveMonth');
+      const goals = localStorage.getItem('goals');
+      const reminders = localStorage.getItem('reminders');
+      const appLanguage = localStorage.getItem('appLanguage');
+      
       // Clear all localStorage data
       localStorage.clear();
+      
+      // Restore budget data, goals/reminders, and preferences (keep after logout)
+      if (budgets) localStorage.setItem('budgets', budgets);
+      if (budgetActiveMonth) localStorage.setItem('budgetActiveMonth', budgetActiveMonth);
+      if (goals) localStorage.setItem('goals', goals);
+      if (reminders) localStorage.setItem('reminders', reminders);
+      if (appLanguage) localStorage.setItem('appLanguage', appLanguage);
       
       // Clear user context
       clearUser();
