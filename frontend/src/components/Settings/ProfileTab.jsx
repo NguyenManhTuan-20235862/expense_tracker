@@ -19,12 +19,22 @@ const ProfileTab = ({ userInfo, onUserUpdate }) => {
   const [loading, setLoading] = useState(false)
 
   // Keep local state in sync when userInfo prop changes (e.g., after async fetch)
+  // Only update if the values actually changed to avoid resetting user edits
   useEffect(() => {
     if (!userInfo) return
-    setFullName(userInfo.fullName || '')
-    setEmail(userInfo.email || '')
-    setCurrentProfileUrl(userInfo.profileImageUrl || '')
-  }, [userInfo])
+    
+    // Only update if userInfo values are different from current state
+    if (userInfo.fullName !== fullName) {
+      setFullName(userInfo.fullName || '')
+    }
+    if (userInfo.email !== email) {
+      setEmail(userInfo.email || '')
+    }
+    if (userInfo.profileImageUrl !== currentProfileUrl) {
+      setCurrentProfileUrl(userInfo.profileImageUrl || '')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo.fullName, userInfo.email, userInfo.profileImageUrl])
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault()
