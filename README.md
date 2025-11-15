@@ -1,190 +1,180 @@
- # Dự án Expense Tracker (Quản lý thu - chi cá nhân)
+ # 💰 Expense Tracker - Quản Lý Thu Chi Cá Nhân
 
-## 1. 📘 Mô tả Dự Án
+## 📘 Giới Thiệu
 
-Ứng dụng **Expense Tracker** là một hệ thống quản lý thu chi cá nhân, gồm frontend (React + Vite) và backend (Node.js + Express + MongoDB). Mục tiêu của dự án là giúp người dùng theo dõi thu nhập, chi tiêu, xem báo cáo tổng quan và quản lý ảnh hồ sơ người dùng.
+Ứng dụng web fullstack giúp quản lý tài chính cá nhân với các tính năng:
+- 💵 Quản lý thu nhập & chi tiêu
+- 💰 Lập kế hoạch ngân sách theo tháng
+- 🎯 Đặt mục tiêu tài chính & theo dõi tiến độ
+- ⏰ Nhắc nhở thanh toán
+- 📊 Báo cáo & biểu đồ trực quan
+- 🌍 Đa ngôn ngữ (EN/JA/VI) & 🌙 Dark Mode
 
-Ứng dụng cung cấp các chức năng chính:
+**Tech Stack:**
+- Frontend: React 19, Vite 7, Tailwind CSS v4
+- Backend: Node.js, Express 5, MongoDB
+- Auth: JWT | Storage: MongoDB + localStorage
 
-- Xác thực người dùng: đăng ký, đăng nhập bằng JWT
-- Quản lý Thu nhập (Income): thêm, xem, xóa, tải Excel
-- Quản lý Chi tiêu (Expense): thêm, xem, xóa, tải Excel
-- Dashboard: tổng quan tổng thu, tổng chi, giao dịch gần đây, thống kê 30/60 ngày
-- Upload ảnh hồ sơ người dùng (multer)
- - Quốc tế hóa giao diện (i18n): hỗ trợ EN/JA/VI (i18next + react-i18next)
- - Chế độ tối (Dark mode) dùng Tailwind v4 (class strategy)
+## ✨ Tính Năng Chính
 
-## 2. 📌 Tính Năng Chính
+### 🔐 Xác Thực
+- Đăng ký/Đăng nhập với JWT (expires: 1h)
+- Password hashing (bcryptjs)
+- Upload avatar (Multer)
 
-### 🔐 Xác thực người dùng
-- Đăng ký / Đăng nhập với JWT (token có thời hạn 1 giờ)
-- Lấy thông tin user hiện tại (protected route)
-
-### 💸 Quản lý Thu nhập
-- Thêm nguồn thu: `{ icon, source, amount, date }`
-- Lấy toàn bộ thu nhập của user
-- Xóa thu nhập theo id
-- Tải dữ liệu thu nhập về file Excel
-
-### 🧾 Quản lý Chi tiêu
-- Thêm khoản chi: `{ icon, category, amount, date }`
-- Lấy toàn bộ chi tiêu của user
-- Xóa chi tiêu theo id
-- Tải dữ liệu chi tiêu về file Excel
+### 💵 Thu Nhập & Chi Tiêu
+- CRUD operations (MongoDB)
+- Export Excel
+- Biểu đồ Line Chart (Income - 60 ngày) & Bar Chart (Expense - 30 ngày)
+- **🔄 Auto-sync**: Expense tự động cập nhật Budget & Goals
 
 ### 📊 Dashboard
-- Tính tổng thu, tổng chi, tổng số dư
-- Thống kê giao dịch 30/60 ngày và trả về các giao dịch gần đây
+- Tổng quan: Balance, Income, Expense
+- Biểu đồ: Bar, Line, Pie charts (Recharts)
+- 10 giao dịch gần nhất
 
-### 🖼️ Upload ảnh
-- Upload ảnh hồ sơ qua endpoint `POST /api/v1/auth/upload-image` (field `image`), file lưu ở `backend/uploads/`
+### 💰 Budget Planning
+- Lập ngân sách theo tháng với từng category
+- Progress bar & color-coding (Green/Yellow/Red)
+- Cảnh báo vượt ngân sách
+- **Auto-sync từ Expense**
+- Chuyển tháng mới (Start New Month)
+- Lịch sử 3 tháng trước
+- **localStorage** - Data persistent
 
-## 3. 🚀 Công Nghệ Sử Dụng
+### 🎯 Goals (Mục tiêu tài chính)
+- Đặt mục tiêu với targetAmount & deadline
+- Progress tracking với countdown
+- **Auto-sync từ Expense**
+- Filter Active/Completed
+- **localStorage** - Data persistent
+
+### ⏰ Reminders
+- Tạo nhắc nhở với date, time, priority
+- Status: Overdue/Today/Upcoming
+- Filter Active/Completed
+- **localStorage** - Data persistent
+
+### ⚙️ Settings
+- Profile: Edit name, email, avatar
+- Security: Đổi mật khẩu
+- Preferences: Language (EN/JA/VI), Dark mode
+
+### 🌐 i18n & 🌙 Dark Mode
+- Đa ngôn ngữ: English, Japanese, Vietnamese (236+ keys)
+- Dark mode với Tailwind v4
+- Persistent preferences (localStorage)
+
+## 🛠️ Tech Stack
 
 ### Backend
-- Node.js, Express 5
-- MongoDB (Mongoose)
-- JWT (jsonwebtoken)
-- Multer (upload hình)
-- xlsx (xuất file Excel)
- - CORS, dotenv
+- Node.js, Express 5.1.0, MongoDB, Mongoose 8.19.0
+- JWT (jsonwebtoken 9.0.2), bcryptjs 3.0.2
+- Multer 2.0.2, xlsx 0.18.5
+- Passport 0.7.0, passport-google-oauth20 2.0.0
+- cors, dotenv, express-session
 
-### Frontend
-- React 19, Vite 7
-- react-router-dom 7, axios
-- Tailwind CSS v4 (hỗ trợ dark mode theo class `.dark`)
-- i18next, react-i18next (đa ngôn ngữ EN/JA/VI)
-- Recharts (biểu đồ)
+### Frontend  
+- React 19.1.1, Vite 7.1.7, react-router-dom 7.9.3
+- Tailwind CSS 4.1.14, @tailwindcss/vite 4.1.14
+- axios 1.12.2, i18next 25.6.0, react-i18next 16.0.1
+- Recharts 3.2.1, react-hot-toast 2.6.0, react-icons 5.5.0
+- emoji-picker-react 4.14.0, moment 2.30.1
 
-## 4. ⚙️ Cài Đặt và Hướng Dẫn Sử Dụng (Local)
+### Storage
+- **MongoDB**: Income, Expense, User
+- **localStorage**: Budget, Goals, Reminders, Token, Language, Theme
 
-### Yêu cầu hệ thống
-- Node.js >= 18
-- npm
-- MongoDB 
+## ⚙️ Cài Đặt
 
-### 1) Backend
+### Yêu cầu
+- Node.js >= 18.x, npm, MongoDB
 
-```powershell
+### Backend
+```bash
 cd backend
 npm install
-# phát triển (nodemon)
-npm run dev
-# hoặc production
-npm start
-```
 
-Tạo file `.env` trong `backend/` với nội dung mẫu:
-
-```
-MONGODB_URI=<connection-string-to-mongodb>
-JWT_SECRET=<some-secret-string>
-CLIENT_URL=http://localhost:5173
+# Tạo file .env
+MONGODB_URI=mongodb://localhost:27017/expense_tracker
+JWT_SECRET=your_secret_key
 PORT=8000
+
+# Chạy server
+npm run dev  # Development
+npm start    # Production
 ```
 
-### 2) Frontend
-
-```powershell
+### Frontend
+```bash
 cd frontend
 npm install
 npm run dev
 ```
+## 📂 Cấu Trúc Project
 
-Frontend mặc định chạy trên `http://localhost:5173`. Kiểm tra và chỉnh `frontend/src/utils/apiPaths.js` nếu backend sử dụng port khác (frontend hiện tại đặt `BASE_URL = "http://localhost:8000"`).
+```
+backend/
+├── config/db.js              # MongoDB connection
+├── controllers/              # Auth, Dashboard, Expense, Income
+├── middleware/               # JWT auth, Multer upload
+├── models/                   # User, Income, Expense (Mongoose)
+├── routes/                   # API routes
+├── uploads/                  # Profile images
+└── server.js
 
-Nếu muốn giữ backend mặc định 5000 theo `server.js`, hãy đổi `BASE_URL` trong `frontend/src/utils/apiPaths.js` sang `http://localhost:5000`. Khuyến nghị: đặt `PORT=8000` trong `.env` backend để khớp cấu hình frontend hiện tại.
+frontend/
+├── src/
+│   ├── components/           # Budget, Charts, Dashboard, Expense, Income, 
+│   │                         # Goals, Reminders, Settings, layouts
+│   ├── context/              # User context
+│   ├── hooks/                # useUserAuth
+│   ├── locales/              # en, ja, vi (i18n)
+│   ├── pages/                # Auth, Dashboard pages
+│   ├── services/             # budgetService, goalService, reminderService
+│   ├── utils/                # apiPaths, axiosInstance, helpers
+│   └── App.jsx
+└── vite.config.js
+```
 
-## 5. 🌐 i18n (Đa ngôn ngữ)
+## 🎨 UI/UX
 
-- Sử dụng i18next + react-i18next
-- File dịch: `frontend/src/locales/{en,ja,vi}/*.json`
-- Trong component, dùng hook `useTranslation()` và gọi `t('your.key')`
-
-## 6. 🌙 Chế độ Tối (Dark Mode)
-
-- Tailwind CSS v4, chiến lược theo class `.dark` gắn trên thẻ `<html>`
-- Nút chuyển theme: `frontend/src/components/layouts/DarkModeToggle.jsx`
-- Các class có biến thể `dark:` để đổi style theo theme
-
-Lưu ý: Tailwind v4 dùng `@import "tailwindcss";` trong `frontend/src/index.css` thay cho cấu hình v3.
-**** Chế độ chưa được hoàn thiện.
+- **Dark Mode**: Tailwind v4 với `.dark` class, persistent localStorage
+- **i18n**: 236+ translation keys (EN/JA/VI)
+- **Responsive**: Mobile-first design
+- **Components**: Emoji picker, Color picker, Date picker, Modal, Toast, Progress bars, Interactive charts
 
 
-## 7. 🛠️ API Endpoints (Chi tiết)
+## 🌐 API Endpoints
 
-Tất cả endpoint có prefix `/api/v1`.
+**Base URL**: `/api/v1` | **Auth**: Bearer Token
 
-### Auth
+### Auth (`/auth`)
+- `POST /register` - Đăng ký
+- `POST /login` - Đăng nhập
+- `GET /getUser` - Lấy thông tin user (protected)
+- `POST /upload-image` - Upload avatar (protected)
 
-- POST `/api/v1/auth/register`
-	- Body JSON: `{ fullName, email, password, profileImageUrl? }`
-	- Response: `{ id, user, token }` (201)
+### Income (`/income`) - Protected
+- `POST /add` - Thêm thu nhập
+- `GET /get` - Lấy tất cả thu nhập
+- `DELETE /:id` - Xóa thu nhập
+- `GET /downloadexcel` - Export Excel
 
-- POST `/api/v1/auth/login`
-	- Body JSON: `{ email, password }`
-	- Response: `{ id, user, token }` (200)
+### Expense (`/expense`) - Protected
+- `POST /add` - Thêm chi tiêu
+- `GET /get` - Lấy tất cả chi tiêu
+- `DELETE /:id` - Xóa chi tiêu
+- `GET /downloadexcel` - Export Excel
 
-- GET `/api/v1/auth/getUser` (protected)
-	- Header: `Authorization: Bearer <token>`
-	- Response: user object (không bao gồm password)
+### Dashboard (`/dashboard`) - Protected
+- `GET /` - Lấy tổng quan (balance, income, expense, charts data, recent transactions)
 
-- POST `/api/v1/auth/upload-image`
-	- multipart/form-data, field: `image`
-	- Response: `{ imageUrl }`
+## 👨‍💻 Author
 
-### Income
+**Nguyễn Mạnh Tuấn**
+- GitHub: [@NguyenManhTuan-20235862](https://github.com/NguyenManhTuan-20235862)
+- Phone: 0378655909
 
-- POST `/api/v1/income/add` (protected)
-	- Body: `{ icon, source, amount, date }`
-	- Response: created income object
-
-- GET `/api/v1/income/get` (protected)
-	- Response: `[ incomeObjects ]`
-
-- DELETE `/api/v1/income/:id` (protected)
-
-- GET `/api/v1/income/downloadexcel` (protected)
-	- Trả về file `income_details.xlsx`
-
-### Expense
-
-- POST `/api/v1/expense/add` (protected)
-	- Body: `{ icon, category, amount, date }`
-
-- GET `/api/v1/expense/get` (protected)
-
-- DELETE `/api/v1/expense/:id` (protected)
-
-- GET `/api/v1/expense/downloadexcel` (protected)
-
-### Dashboard
-
-- GET `/api/v1/dashboard` (protected)
-	- Response: `{ totalBalance, totalIncome, totalExpense, last30DaysExpenses, last60DaysIncome, recentTransactions }`
-
-## 8. 🗃️ Database & Mô hình dữ liệu (Tóm tắt)
-
-- `User`:
-	- `fullName`, `email` (unique), `password` (được hash), `profileImageUrl`
-
-- `Income`:
-	- `userId` (ObjectId), `icon`, `source`, `amount`, `date`
-
-- `Expense`:
-	- `userId` (ObjectId), `icon`, `category`, `amount`, `date`
-
-## 9. Video demo
-...
-
-## 10. Tác giả và liên hệ
-- Nguyễn Mạnh Tuấn - 0378655909
-
----
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 1960bfe2c6ebe919f775df6a0c9c1cf0887efdce
 
 
