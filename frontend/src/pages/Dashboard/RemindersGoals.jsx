@@ -190,31 +190,57 @@ const RemindersGoals = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex gap-2">
-            <button
-              onClick={() => setActiveTab('goals')}
-              className={`px-6 py-2.5 rounded-lg font-medium transition ${
-                activeTab === 'goals'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {t('tabGoals')} ({goalStats.active})
-            </button>
-            <button
-              onClick={() => setActiveTab('reminders')}
-              className={`px-6 py-2.5 rounded-lg font-medium transition ${
-                activeTab === 'reminders'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {t('tabReminders')} ({reminderStats.active})
-            </button>
+        <div className="mb-6 space-y-4">
+          {/* Tab buttons and Add button */}
+          <div className="flex items-center justify-between">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab('goals')}
+                className={`px-6 py-2.5 rounded-lg font-medium transition ${
+                  activeTab === 'goals'
+                    ? 'bg-primary text-white'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('tabGoals')} ({goalStats.active})
+              </button>
+              <button
+                onClick={() => setActiveTab('reminders')}
+                className={`px-6 py-2.5 rounded-lg font-medium transition ${
+                  activeTab === 'reminders'
+                    ? 'bg-primary text-white'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('tabReminders')} ({reminderStats.active})
+              </button>
+            </div>
+
+            <div>
+              {activeTab === 'goals' && (
+                <button
+                  onClick={handleAddGoal}
+                  className="btn-primary flex items-center gap-2"
+                >
+                  <MdAdd size={20} />
+                  {t('goalAddButton')}
+                </button>
+              )}
+              
+              {activeTab === 'reminders' && (
+                <button
+                  onClick={handleAddReminder}
+                  className="btn-primary flex items-center gap-2"
+                >
+                  <MdAdd size={20} />
+                  {t('reminderAddButton')}
+                </button>
+              )}
+            </div>
           </div>
 
-          <div className="flex gap-3">
+          {/* Show Completed/Active toggle button */}
+          <div className="flex">
             <button
               onClick={() => setShowCompleted(!showCompleted)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
@@ -225,26 +251,6 @@ const RemindersGoals = () => {
             >
               {showCompleted ? t('showActive') : t('showCompleted')}
             </button>
-            
-            {activeTab === 'goals' && (
-              <button
-                onClick={handleAddGoal}
-                className="btn-primary flex items-center gap-2"
-              >
-                <MdAdd size={20} />
-                {t('goalAddButton')}
-              </button>
-            )}
-            
-            {activeTab === 'reminders' && (
-              <button
-                onClick={handleAddReminder}
-                className="btn-primary flex items-center gap-2"
-              >
-                <MdAdd size={20} />
-                {t('reminderAddButton')}
-              </button>
-            )}
           </div>
         </div>
 

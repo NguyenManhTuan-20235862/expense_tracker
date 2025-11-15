@@ -3,15 +3,14 @@ import DashboardLayout from '../../components/layouts/DashboardLayout'
 import BudgetSummary from '../../components/Budget/BudgetSummary'
 import BudgetItemCard from '../../components/Budget/BudgetItemCard'
 import AddBudgetModal from '../../components/Budget/AddBudgetModal'
-import BudgetHistory from '../../components/Budget/BudgetHistory'
+import BudgetHistoryMultiple from '../../components/Budget/BudgetHistoryMultiple';
 import { 
   getBudgets, 
   addBudget, 
   updateBudget, 
   deleteBudget, 
-  getPreviousMonthBudgets,
+  getLast3MonthsBudgets,
   getActiveMonthString,
-  getPreviousMonthString,
   formatMonthDisplay,
   startNewMonth,
   hasActiveBudgets
@@ -23,19 +22,18 @@ import { MdWarning, MdNavigateNext } from 'react-icons/md'
 const Budget_Planning = () => {
   const { t, i18n } = useTranslation()
   const [items, setItems] = useState([])
-  const [previousMonthItems, setPreviousMonthItems] = useState([])
+  const [last3MonthsData, setLast3MonthsData] = useState([])
   const [open, setOpen] = useState(false)
   const [editingId, setEditingId] = useState(null)
   const [activeMonth, setActiveMonth] = useState(getActiveMonthString())
-  const previousMonth = getPreviousMonthString()
 
   useEffect(() => {
     // Load active month budgets
     const currentActive = getActiveMonthString()
     setActiveMonth(currentActive)
     setItems(getBudgets(currentActive))
-    // Load previous month budgets for history
-    setPreviousMonthItems(getPreviousMonthBudgets())
+    // Load last 3 months budgets for history
+    setLast3MonthsData(getLast3MonthsBudgets())
   }, [])
 
   // Check for over-budget items and show warnings
@@ -93,7 +91,7 @@ const Budget_Planning = () => {
     const newMonth = startNewMonth()
     setActiveMonth(newMonth)
     setItems([])
-    setPreviousMonthItems(getPreviousMonthBudgets())
+    setLast3MonthsData(getLast3MonthsBudgets())
     toast.success(t('budgetNewMonthSuccess', { month: formatMonthDisplay(newMonth, i18n.language) }))
   }
 
@@ -152,8 +150,8 @@ const Budget_Planning = () => {
               onSubmit={handleSubmit}
             />
 
-            {/* Previous Month History */}
-            <BudgetHistory budgets={previousMonthItems} monthString={previousMonth} />
+            {/* Last 3 Months History */}
+            <BudgetHistoryMultiple monthsData={last3MonthsData} />
         </div>
     </DashboardLayout>
   )

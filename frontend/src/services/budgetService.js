@@ -136,6 +136,23 @@ export const getPreviousMonthBudgets = () => {
 // Get previous month string
 export const getPreviousMonthString = () => getPreviousMonth();
 
+// Get budgets for last 3 months (excluding active month)
+export const getLast3MonthsBudgets = () => {
+  const activeMonth = getActiveMonth();
+  const allBudgets = read();
+  
+  // Get 3 previous months
+  const month1 = getPreviousMonth(activeMonth);
+  const month2 = getPreviousMonth(month1);
+  const month3 = getPreviousMonth(month2);
+  
+  return [
+    { month: month1, budgets: allBudgets.filter(b => b.month === month1) },
+    { month: month2, budgets: allBudgets.filter(b => b.month === month2) },
+    { month: month3, budgets: allBudgets.filter(b => b.month === month3) }
+  ].filter(item => item.budgets.length > 0); // Only return months with data
+};
+
 // Format month string to display (e.g., "2025-10" -> "October 2025")
 export const formatMonthDisplay = (monthStr, locale = 'en') => {
   if (!monthStr) return '';
